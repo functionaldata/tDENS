@@ -23,9 +23,10 @@ dens density values on dSup
 Function for converting log quantile densities to densities
 }
 \examples{
-set.seed(1)
-n <- 20
-pts <- seq(0, 1, by=0.05) 
+x <- seq(0,2,length.out =512)
+y <- rep(0.5,length.out =512)
+yOnLQ <- dens2lqd(dens=y, dSup = x) # should equate # -log(1/2)
+yOnDens <- lqd2dens(dSup=x, lqd = yOnLQ)   
 }
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
