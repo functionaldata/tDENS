@@ -9,7 +9,7 @@ This is R package implementation of the methodology proposed by Petersen & Muell
 
 Assuming you can see this you should have access to this repo. Therefore just use clone the repo and then use `devtools` with `load_all()` to load the file. It should automatically compile the functions needed and get you going at no time (ie. `devtools::load_all('folder_you_cloned_all_this_stuff')`)
 
-## But I just want to install it...
+### But I just want to install it...
 You can install the package in R using:
 ```
 devtools::install_github("functionaldata/tDENS") 
