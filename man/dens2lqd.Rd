@@ -7,7 +7,7 @@
 dens2lqd(dens, dSup, N = length(dSup), lqSup = NULL)
 }
 \arguments{
-\item{dens}{density values on dout - must be strictly positive and integrate to 1}
+\item{dens}{density values on dSup - must be strictly positive and integrate to 1}
 
 \item{dSup}{support (grid) for Density domain}
 
@@ -16,7 +16,7 @@ dens2lqd(dens, dSup, N = length(dSup), lqSup = NULL)
 \item{lqSup}{support for LQ domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points}
 }
 \value{
-lqd log quantile density on [0,1]
+lqd log quantile density on lqSup
 }
 \description{
 Function for converting densities to quantile functions

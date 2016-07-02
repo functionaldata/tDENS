@@ -8,6 +8,7 @@
 #' @param dSupUsedInLQ Support (grid) for Density domain that was used when calculating the LQ projections (maybe different from the original)
 #' @param dSup Original support (grid) for Density domain of the data
 #' @param useAlpha Logical indicator to regularise the support so the smallest value of each density is zero 
+#' @param alpha Scalar to deregularise the supports with (default=0)
 
 #' @return list with the 'DEN' projected data, and 'dSup' that was originally used for the data.
 #' 

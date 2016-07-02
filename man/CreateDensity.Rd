@@ -32,7 +32,7 @@ Available control options are
 }
 }
 \examples{
-par(mfrow=c(1,3))
+par(mfrow=c(1,2))
 makeComparisonPlotE <- function(N, mySeed = 123){
   set.seed(mySeed)
   asdf2  = (rexp(N, rate = 1.5))
@@ -50,7 +50,6 @@ makeComparisonPlotE <- function(N, mySeed = 123){
 
 makeComparisonPlotE(100)
 makeComparisonPlotE(2000)
-makeComparisonPlotE(40000) 
 
 }
 \references{
