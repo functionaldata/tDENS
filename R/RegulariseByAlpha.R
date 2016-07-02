@@ -10,9 +10,11 @@
 #' @return dens density values on dSup
 #' 
 #' @examples
-#' set.seed(1)
-#' n <- 20
-#' pts <- seq(0, 1, by=0.05) 
+#' 
+#'  x = seq(0,1,length.out =122)
+#'  y = seq(0,2,length.out =122)
+#'  z = RegulariseByAlpha(x=x, y=y, alpha = 0.1)
+#'  
 #' @export
  
 RegulariseByAlpha <- function(x,y,alpha=0.01, deregularise = FALSE){ 

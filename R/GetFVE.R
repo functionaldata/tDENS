@@ -7,8 +7,6 @@
 #' 
 #' @return FVEvector
 #' 
-#' @examples 
-#' pts <- seq(0, 1, by=0.05) 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015} 
 #' @export

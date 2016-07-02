@@ -1,5 +1,5 @@
 
-makePNG = TRUE
+makePNG = FALSE
 if(makePNG) png( "HadesEffortNorm.png" , width = 16.92, height = 9, units = 'in', res=213 )
 par(mfrow=c(2,3))
 makeComparisonPlotN <- function(N, mySeed = 123, twoGaussians = FALSE){
@@ -33,7 +33,7 @@ makeComparisonPlotN(40000, twoGaussians = TRUE)
 if(makePNG) dev.off()
 
 
-makePNG = TRUE
+
 if(makePNG) png( "HadesEffortExp.png" , width = 16.92, height = 4.5, units = 'in', res=213 )
 par(mfrow=c(1,3))
 makeComparisonPlotE <- function(N, mySeed = 123){
@@ -43,7 +43,7 @@ makeComparisonPlotE <- function(N, mySeed = 123){
   asdf2  = (rexp(N, rate = 1.5))
   plot(density(asdf2, bw = "SJ"), main= "Exponential (rate=1.5)", xlab = paste0(collapse = '', c( "N = ", as.character(N))) , ylim = c(0, 1.45))
   lines(density(asdf2), col='red')
-  Unormal = CreateDensity(y = asdf2)
+  Unormal = CreateDensity(y = asdf2, list( infSupport=FALSE))
   lines(col='green', x = Unormal$x, y = Unormal$y)
   lines(col='magenta' , Unormal$x, dexp(Unormal$x, rate = 1.5))
   abline(v = min(asdf2))
@@ -57,7 +57,6 @@ if(makePNG) dev.off()
 
 
 
-makePNG = TRUE
 if(makePNG) png( "HadesEffortUnif.png" , width = 16.92, height = 4.5, units = 'in', res=213 )
 par(mfrow=c(1,3))
 makeComparisonPlotE <- function(N, mySeed = 123){
@@ -67,7 +66,7 @@ makeComparisonPlotE <- function(N, mySeed = 123){
   asdf2  = (runif(N ))
   plot(density(asdf2, bw = "SJ"), main= "Uniform (0,1)", xlab = paste0(collapse = '', c( "N = ", as.character(N))) , ylim = c(0, 1.45))
   lines(density(asdf2), col='red')
-  Unormal = CreateDensity(y = asdf2)
+  Unormal = CreateDensity(y = asdf2,  list( infSupport=FALSE) )
   lines(col='green', x = Unormal$x, y = Unormal$y)
   lines(col='magenta' , Unormal$x, dunif(Unormal$x))
   abline(v = min(asdf2))

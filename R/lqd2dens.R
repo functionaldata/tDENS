@@ -51,18 +51,18 @@ lqd2dens = function(lqd, lqSup = seq(0, 1, length.out = length(lqd)), dSup, useS
   return(dens)
 }
 
-MakeDENsample <- function(Qmatrix, alpha = 0, dSupUsedInLQ, dSup, useAlpha = FALSE ){
-  # A. Get the densities from the log-quantile-density projections
-  DENreg <- t(apply( Qmatrix, 1, function(u) lqd2dens( u, dSup = dSupUsedInLQ, useSplines = TRUE) ) ) 
-  
-  # B. Correct them according to their bump / Here I do not use alpha but rather the smallest value
-  DEN3 <- t(apply( DENreg,  1, function(u) 
-    DeregulariseByAlpha(y = u, x = dSupUsedInLQ, alpha = ifelse( useAlpha, alpha, min(u)) ) ) ) 
-  
-  # C. Pad the density with the appropariate 0.
-  DEN <- matrix(0, nrow = nrow(Qmatrix), ncol = length(dSup) )
-  DEN[,  match(dSupUsedInLQ, dSup)] <- DEN3
-  
-  return( list(DEN = DEN, origSupport = dSup) )
-}
-
+#MakeDENsample <- function(Qmatrix, alpha = 0, dSupUsedInLQ, dSup, useAlpha = FALSE ){
+#  # A. Get the densities from the log-quantile-density projections
+#  DENreg <- t(apply( Qmatrix, 1, function(u) lqd2dens( u, dSup = dSupUsedInLQ, useSplines = TRUE) ) ) 
+#  
+#  # B. Correct them according to their bump / Here I do not use alpha but rather the smallest value
+#  DEN3 <- t(apply( DENreg,  1, function(u) 
+#    DeregulariseByAlpha(y = u, x = dSupUsedInLQ, alpha = ifelse( useAlpha, alpha, min(u)) ) ) ) 
+#  
+#  # C. Pad the density with the appropariate 0.
+#  DEN <- matrix(0, nrow = nrow(Qmatrix), ncol = length(dSup) )
+#  DEN[,  match(dSupUsedInLQ, dSup)] <- DEN3
+#  
+#  return( list(DEN = DEN, origSupport = dSup) )
+#}
+#

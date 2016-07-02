@@ -42,18 +42,18 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqSup = NULL){
   return(lqd)
 }
 
-MakeLQDsample <- function(dmatrix, alpha = 0, dInput ){
-  # A. Find the points to keep and make sure they integrate to 1.
-  pointsToKeep <-  which(0 < apply(dmatrix, 2, quantile, 0.995))
-  newSupport <- dInput[pointsToKeep]
-  dmatrix2 <- dmatrix[, pointsToKeep];
-  dmatrix3 <- dmatrix2 / apply(dmatrix2, 1, function(u) fdapace:::trapzRcpp(Y=  u, X = newSupport) )
-  
-  # B. Regularise by alpha
-  dmatrixReg <-  t(apply( dmatrix3, 1, function(u) RegulariseByAlpha(u, x = newSupport, alpha = alpha, deregularise = FALSE) ))
-  
-  # C. Get the log-quantile-density projections
-  LQD <- t(apply( dmatrixReg, 1, dens2lqd, dSup = dInput[pointsToKeep]) ) 
-  return( list(LQD = LQD, alpha = alpha, newSupport = newSupport) )
-}
+#MakeLQDsample <- function(dmatrix, alpha = 0, dInput ){
+#  # A. Find the points to keep and make sure they integrate to 1.
+#  pointsToKeep <-  which(0 < apply(dmatrix, 2, quantile, 0.995))
+#  newSupport <- dInput[pointsToKeep]
+#  dmatrix2 <- dmatrix[, pointsToKeep];
+#  dmatrix3 <- dmatrix2 / apply(dmatrix2, 1, function(u) fdapace:::trapzRcpp(Y=  u, X = newSupport) )
+#  
+#  # B. Regularise by alpha
+#  dmatrixReg <-  t(apply( dmatrix3, 1, function(u) RegulariseByAlpha(u, x = newSupport, alpha = alpha, deregularise = FALSE) ))
+#  
+#  # C. Get the log-quantile-density projections
+#  LQD <- t(apply( dmatrixReg, 1, dens2lqd, dSup = dInput[pointsToKeep]) ) 
+#  return( list(LQD = LQD, alpha = alpha, newSupport = newSupport) )
+#}
 
