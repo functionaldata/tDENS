@@ -1,11 +1,11 @@
 #' Function for converting densities to quantile functions 
 #' 
-#' @param dens density values on dout - must be strictly positive and integrate to 1
+#' @param dens density values on dSup - must be strictly positive and integrate to 1
 #' @param dSup support (grid) for Density domain
 #' @param lqSup support for LQ domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points
 #' @param N desired number of points on a [0,1] grid for quantile function; default length(dSup)
 #' 
-#' @return lqd log quantile density on [0,1]
+#' @return lqd log quantile density on lqSup
 #' 
 #' @examples
 #' x <- seq(0,2,length.out =512)

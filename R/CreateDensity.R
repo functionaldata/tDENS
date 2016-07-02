@@ -79,7 +79,10 @@ CreateDensity <- function(y, optns = list()){
   }
   
   N = length(y)
-  histgrid = seq( min(y)-delta*0.5, max(y)+delta*0.5, by = delta);
+  histgrid = seq( min(y)-delta*0.5, max(y)+delta*0.5, by = delta );
+  if(  (max(y)+delta*0.5) > histgrid[length(histgrid)] ){
+    histgrid[length(histgrid)] =  max(y)+delta*0.5;
+  }
   M = length(histgrid)
   histObj =  hist(y, breaks = histgrid, plot = FALSE);
   yin = histObj$counts[1:M-1] / N / delta;
