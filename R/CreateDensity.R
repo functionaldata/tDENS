@@ -20,7 +20,7 @@
 #' \item{y}{A vector of length \emph{nGridReg} with the values of the KDE at the support points.} 
 #' 
 #' @examples
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(1,2))
 #' makeComparisonPlotE <- function(N, mySeed = 123){
 #'   set.seed(mySeed)
 #'   asdf2  = (rexp(N, rate = 1.5))
@@ -38,7 +38,6 @@
 #' 
 #' makeComparisonPlotE(100)
 #' makeComparisonPlotE(2000)
-#' makeComparisonPlotE(40000) 
 #' 
 #' @references
 #' \cite{HG Mueller, JL Wang and WB Capra (1997). "From lifetables to hazard rates: The transformation approach." Biometrika 84, 881-892.}
