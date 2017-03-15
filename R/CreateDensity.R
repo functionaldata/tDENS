@@ -100,6 +100,7 @@ CreateDensity <- function(y, optns = list()){
     if(is.null(outputGrid)){
       densObj$x <- seq(min(y)-delta, max(y)+delta, length.out = nRegGrid)
     }
+    # remove qpadding here
     qpadding = 10
     mu = fdapace::Lwls1D(bw = bw, kernel_type = kernel, win = rep(1,M+(-1+2*qpadding)), 
                          xin = c( min(y) - 11:2 *delta, xin, max(y) + 2:11 * delta), yin = c(rep(0,qpadding),yin,rep(0,qpadding)), xout = densObj$x)
