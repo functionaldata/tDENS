@@ -79,7 +79,7 @@ CreateDensity <- function(y, optns = list()) {
   
   N = length(y)
   
-  if(is.null(histGrid)) {
+  if(is.null(outputGrid)) {
     histgrid = seq(min(y) - delta*0.5,
                    max(y) + delta*0.5,
                    by = delta);
