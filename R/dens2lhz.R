@@ -4,12 +4,10 @@
 #' @param dSup support (grid) for Density domain
 #' @param lhSup support for LH domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points
 #' @param N desired number of points on a [0,1] grid for quantile function; default length(dSup)
+#' @param delta support trimming variable; default trimmed support is the maximum value such that the cdf is less than 1
 #' 
-#' @return lhz log hazard density on lhSup
+#' @return out list containing lhSup - delta, log hazard density, and delta
 #' 
-#' @examples
-#' x <- seq(0,2,length.out =512)
-#' y <- rep(0.5,length.out =512)
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015} 
 #' @export
