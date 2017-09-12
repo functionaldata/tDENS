@@ -25,4 +25,3 @@ y <- sin(x)
 fastTrapz(x, y) # 1.999985
   
 }
-

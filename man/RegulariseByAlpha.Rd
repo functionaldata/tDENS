@@ -28,4 +28,3 @@ Completely uniform distributions cannot be regularised by a level alpha.
  z = RegulariseByAlpha(x=x, y=y, alpha = 0.1)
  
 }
-

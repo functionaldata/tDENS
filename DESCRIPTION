@@ -8,9 +8,9 @@ Author: A. Petersen, P. Z. Hadjipantelis and H.G. Mueller
 Maintainer: Pantelis Z. Hadjipantelis <pantelis@ucdavis.edu>
 Description: Functional Data Analysis for Density Functions by Transformation to
     a Hilbert space. A "better" domain idea.
-Depends:  R (>= 3.1.1)
+Depends: R (>= 3.1.1)
 License: BSD_3_clause + file LICENSE
 LazyData: false
 Imports: fdapace (>= 0.2.0) 
 Suggests: testthat 
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

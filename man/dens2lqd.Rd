@@ -29,4 +29,3 @@ yOnLQ <- dens2lqd( dens=y, dSup = x) # should equate # -log(1/2)
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
 }
-

@@ -40,4 +40,3 @@ sampWiener <- Sparsify(sampWiener, pts, 10)
 res <- FPCA(sampWiener$Ly, sampWiener$Lt)
 CreateModeOfVarPlotLQ2D(res)
 }
-

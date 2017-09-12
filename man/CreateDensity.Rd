@@ -55,4 +55,3 @@ makeComparisonPlotE(2000)
 \references{
 \cite{HG Mueller, JL Wang and WB Capra (1997). "From lifetables to hazard rates: The transformation approach." Biometrika 84, 881-892.}
 }
-

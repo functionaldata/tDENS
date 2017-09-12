@@ -31,4 +31,3 @@ yOnDens <- lqd2dens(dSup=x, lqd = yOnLQ)
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
 }
-
