@@ -11,5 +11,5 @@
 #' \item{colspace}{pH in [0,14]}
 #' }  
 #' @references
-#' The authors would like to thank Dr. Michael Knight for providing the original data
+#' The authors would like to thank Dr. Chris Knight for providing the original data
 NULL
