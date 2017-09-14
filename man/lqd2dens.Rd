@@ -4,15 +4,15 @@
 \alias{lqd2dens}
 \title{Function for converting log quantile densities to densities}
 \usage{
-lqd2dens(lqd, lqSup = seq(0, 1, length.out = length(lqd)), dSup,
+lqd2dens(lqd, lqdSup = seq(0, 1, length.out = length(lqd)), dSup,
   useSplines = TRUE)
 }
 \arguments{
-\item{lqd}{log quantile density on lqSup}
+\item{lqd}{log quantile density on lqdSup}
 
-\item{lqSup}{support for LQ domain - must begin at 0 and end at 1}
+\item{lqdSup}{support forlqd domain - must begin at 0 and end at 1}
 
-\item{dSup}{support for Density domain - max and min values are assumed to mark the boundary of the support.}
+\item{dSup}{support for Density domain - max and min values mark the boundary of the support.}
 
 \item{useSplines}{fit spline to the lqd when doing the numerical integration (default: TRUE)}
 }
@@ -25,9 +25,9 @@ Function for converting log quantile densities to densities
 \examples{
 x <- seq(0,2,length.out =512)
 y <- rep(0.5,length.out =512)
-yOnLQ <- dens2lqd(dens=y, dSup = x) # should equate # -log(1/2)
-yOnDens <- lqd2dens(dSup=x, lqd = yOnLQ)   
+y.lqd <- dens2lqd(dens=y, dSup = x) # should equate # -log(1/2)
+y.dens <- lqd2dens(dSup=x, lqd = y.lqd)   
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
 }

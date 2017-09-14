@@ -2,29 +2,50 @@
 % Please edit documentation in R/MakeDENsample.R
 \name{MakeDENsample}
 \alias{MakeDENsample}
-\title{Convenience function for converting log-quantile functions to densities}
+\title{Convenience function for converting log quantile densities to densities}
 \usage{
-MakeDENsample(qmatrix, alpha = 0, dSupUsedInLQ, dSup, useAlpha = FALSE)
+MakeDENsample(qmatrix, lqdSup = seq(0, 1, length.out = ncol(qmatrix)),
+  dSup = seq(0, 1, length.out = ncol(qmatrix)), useAlpha = FALSE,
+  alpha = 0)
 }
 \arguments{
-\item{qmatrix}{Matrix holding the log-quantiles values on [0,1] and assumed to lay strictly on dSupUsedInLQ}
+\item{qmatrix}{Matrix holding the log quantile density values on [0,1]}
 
-\item{alpha}{Scalar to deregularise the supports with (default=0)}
+\item{lqdSup}{Support grid for input log quantile densities (default = seq(0, 1, length.out = ncol(qmatrix)))}
 
-\item{dSupUsedInLQ}{Support (grid) for Density domain that was used when calculating the LQ projections (maybe different from the original)}
+\item{dSup}{Support grid for output densities (default = seq(0, 1, length.out = ncol(qmatrix)))}
 
-\item{dSup}{Original support (grid) for Density domain of the data}
+\item{useAlpha}{Logical indicator to deregularise the densities (default = FALSE)}
 
-\item{useAlpha}{Logical indicator to regularise the support so the smallest value of each density is zero}
+\item{alpha}{Scalar to deregularise the density - where possible, this will be the minimum value for the deregularised densities (default=0)}
 }
 \value{
-list with the 'DEN' projected data, and 'dSup' that was originally used for the data.
+list with the 'DEN' transformed data, and 'dSup' that matches the input argument.
 }
 \description{
-See 'lqd2dens' and 'RegulariseByAlpha' for more details.
-This function will automatically calculate the:sout support points that the 99.5-th percentile (calculated using all available samples) is not positive.
-It will then normalise the new densities to integraate to one, regularise by 'alpha' and calculate the LQ projection.
+See 'lqd2dens' and 'DeregulariseByAlpha' for more details.
+This function transforms the log quantile densities in 'qmatrix' to density functions, optionally followed by deregularisation.
+}
+\examples{
+ 
+
+x <- seq(0,1,length.out = 101)
+y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) b + 2*(1 - b)*x)) # linear densities on (0, 1)
+
+# Get LQDs
+
+y.lqd = MakeLQDsample(dmatrix = y, dSup = x)
+matplot(y.lqd$lqdSup, t(y.lqd$LQD), ylab = 'LQD', type = 'l', lty = 1, col = 'black')
+
+# Get Densities Back
+
+y.dens = MakeDENsample(y.lqd$LQD, lqdSup = x, dSup = x)
+matplot(y.dens$dSup, t(y.dens$DEN), ylab = 'Density', type = 'l', lty = 1, col = 'blue')
+
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{DeregulariseByAlpha},\link{lqd2dens}}
 }

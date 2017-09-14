@@ -2,29 +2,36 @@
 % Please edit documentation in R/RegulariseByAlpha.R
 \name{RegulariseByAlpha}
 \alias{RegulariseByAlpha}
-\title{Function to regularise non-strictly positive densities by a scalar alpha}
+\title{Function to regularise densities to have (larger) minimum value}
 \usage{
-RegulariseByAlpha(x, y, alpha = 0.01, deregularise = FALSE)
+RegulariseByAlpha(x, y, alpha = 0.01)
 }
 \arguments{
 \item{x}{support of the density}
 
 \item{y}{values of the density}
 
-\item{alpha}{scalar to regularise with (default = 0.01)}
-
-\item{deregularise}{logical to deregularise by alpha (instead of regularising) (default: FALSE )}
+\item{alpha}{scalar to regularise with (default = 0.01) - this will be the minimum value of the regularised density, unless \code{min(y) > alpha}, in which case 
+no regularisation will be performed}
 }
 \value{
 dens density values on dSup
 }
 \description{
-Completely uniform distributions cannot be regularised by a level alpha.
+If possible, regularises the input density \code{y} to have minimum density value is \code{alpha}. See details.
+}
+\details{
+If \code{min(y) >= alpha} or \code{y} is the uniform distribution, no regularisation is performed and \code{y} is returned.  If \code{alpha*diff(range(x)) > 1}, 
+the regularisation is not possible and an error is thrown.  Otherwise, the regularised density is computed by adding an appropriate constant \code{gam} \code{y}, 
+followed by renormalisation to have integral 1.
 }
 \examples{
 
- x = seq(0,1,length.out =122)
- y = seq(0,2,length.out =122)
+ x = seq(0,1,length.out=122)
+ y = seq(0,2,length.out=122)
  z = RegulariseByAlpha(x=x, y=y, alpha = 0.1)
  
+}
+\seealso{
+\code{\link{DeregulariseByAlpha}}
 }

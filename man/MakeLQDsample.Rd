@@ -2,25 +2,49 @@
 % Please edit documentation in R/MakeLQDsample.R
 \name{MakeLQDsample}
 \alias{MakeLQDsample}
-\title{Convenience function for converting densities to log-quantile functions}
+\title{Convenience function for converting densities to log-quantile densities}
 \usage{
-MakeLQDsample(dmatrix, alpha = 0, dInput)
+MakeLQDsample(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup)),
+  useAlpha = FALSE, alpha = 0.01)
 }
 \arguments{
-\item{dmatrix}{Matrix holding the density values on dInput - assumed to be strictly positive and integrate to 1}
+\item{dmatrix}{Matrix holding the density values on dSup - all rows must be strictly positive and integrate to 1}
 
-\item{alpha}{Scalar to regularise the supports with (default=0)}
+\item{dSup}{Support (grid) for Density domain}
 
-\item{dInput}{Support (grid) for Density domain}
+\item{lqdSup}{Support grid for lqd domain (default = seq(0, 1, length.out = length(dSup)))}
+
+\item{useAlpha}{should regularisation be performed (default=FALSE)}
+
+\item{alpha}{Scalar to regularise the supports with (default=0.01)}
 }
 \value{
-list with the 'LQD' projected data, the 'alpha' used and the 'newSupport' that was defined after trimming the data.
+list with 'LQD', a matrix of log quantile density functions, and
 }
 \description{
 See 'dens2lqd' and 'RegulariseByAlpha' for more details.
-This function will automatically trim out support points that the 99.5-th percentile (calculated using all available samples) is not positive.
-It will then normalise the new densities to integraate to one, regularise by 'alpha' and calculate the LQ projection.
+This function first (transforms the densities in 'dmatrix' to log quantile density functions, optionally followed by regularisation.
+}
+\examples{
+ 
+
+x <- seq(0,1,length.out = 101)
+y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) b + 2*(1 - b)*x)) # linear densities on (0, 1)
+
+# Get LQDs
+
+y.lqd = MakeLQDsample(dmatrix = y, dSup = x)
+matplot(y.lqd$lqdSup, t(y.lqd$LQD), ylab = 'LQD', type = 'l', lty = 1, col = 'black')
+
+# Get Densities Back
+
+y.dens = MakeDENsample(y.lqd$LQD, lqdSup = x, dSup = x)
+matplot(y.dens$dSup, t(y.dens$DEN), ylab = 'Density', type = 'l', lty = 1, col = 'blue')
+
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{RegulariseByAlpha},\link{dens2lqd}}
 }

@@ -2,17 +2,15 @@
 
 export(CreateDensity)
 export(CreateModeOfVarPlotLQ2D)
+export(DeregulariseByAlpha)
 export(GetFVE)
 export(MakeDENsample)
 export(MakeLQDsample)
 export(RegulariseByAlpha)
 export(dens2lqd)
+export(dens2qd)
+export(dens2quantile)
 export(fastTrapz)
+export(getWFmean)
 export(lqd2dens)
-
-# I just did.
-importFrom("grDevices", "colorRampPalette")
-importFrom("graphics", "grid", "hist", "legend", "lines", "matplot")
-importFrom("stats", "approx", "integrate", "median", "quantile",
-             "spline", "splinefun")
-
+export(qd2dens)

@@ -4,16 +4,20 @@
 \alias{GetFVE}
 \title{Function for converting densities to quantile functions}
 \usage{
-GetFVE(fpcaObj, dmatrix, dSup, alpha = 0.01)
+GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0)
 }
 \arguments{
 \item{fpcaObj}{PACE output (FPCA on LQDs)}
 
-\item{dmatrix}{matrix of densities measures on grid dout, rows correspond to individual densities}
+\item{dmatrix}{matrix of original densities measures on grid dout, rows correspond to individual densities}
 
-\item{dSup}{support for Density domain - max and min values are assumed to mark the boundary of the support.}
+\item{dSup}{support for Density domain - max and min mark the boundary of the support.}
 
-\item{alpha}{scalar to regularise with (default = 0.01)}
+\item{metric}{metric for measuring variance - 'L2' for Euclidean or 'W' for Wasserstein}
+
+\item{useAlpha}{should deregularisation be performed? (default = FALSE)}
+
+\item{alpha}{scalar to deregularise when transforming back to density space with (default = 0)}
 }
 \value{
 FVEvector
@@ -22,5 +26,8 @@ FVEvector
 Function for converting densities to quantile functions
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{lqd2dens},\link{DeregulariseByAlpha}}
 }
