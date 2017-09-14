@@ -40,7 +40,7 @@ RegulariseByAlpha <- function(x,y,alpha=0.01){
       stop('alpha regularisation does not result in valid density.')
     }else {
       gam = (alpha - min(y))/(1 - totalBumpArea)
-      return((y + gamma)/(1 + gam*diff(range(x))))
+      return((y + gam)/(1 + gam*diff(range(x))))
     }
   }
 }
