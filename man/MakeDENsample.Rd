@@ -30,7 +30,8 @@ This function transforms the log quantile densities in 'qmatrix' to density func
  
 
 x <- seq(0,1,length.out = 101)
-y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) b + 2*(1 - b)*x)) # linear densities on (0, 1)
+# linear densities on (0, 1)
+y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) b + 2*(1 - b)*x)) 
 
 # Get LQDs
 

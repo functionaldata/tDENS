@@ -29,7 +29,8 @@ This function first (transforms the densities in 'dmatrix' to log quantile densi
  
 
 x <- seq(0,1,length.out = 101)
-y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) -log(b^2 + 4*(1-b)*x)/2)) # some log quantile densities on (0, 1)
+# some log quantile densities on (0, 1)
+y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) -log(b^2 + 4*(1-b)*x)/2)) 
 
 # Get densities
 

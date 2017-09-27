@@ -15,7 +15,7 @@ RegulariseByAlpha(x, y, alpha = 0.01)
 no regularisation will be performed}
 }
 \value{
-dens density values on dSup
+dens density values on x
 }
 \description{
 If possible, regularises the input density \code{y} to have minimum density value is \code{alpha}. See details.

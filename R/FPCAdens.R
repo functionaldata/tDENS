@@ -7,7 +7,7 @@
 #' @param lqdSup Support grid for lqd domain (default = seq(0, 1, length.out = length(dSup)))
 #' @param useAlpha should regularisation be performed (default=FALSE) 
 #' @param alpha Scalar to regularise the supports with (default=0.01)
-#' @param opnts A list of options for FPCA.  See documentation for \code{FPCA}.
+#' @param optns A list of options for FPCA.  See documentation for \code{FPCA}.
 #'
 #' @details Densities are transformed to log-quantile densities, followed by standard FPCA.  If \code{useAlpha = TRUE}, densities are regularized before transformation
 #' 
@@ -19,17 +19,21 @@
 #' data(Top50BabyNames)
 #'
 #' # Perform Transformation FPCA for male baby name densities
-#' X = FPCAdens(dmatrix = t(Top50BabyNames$dens$female), dSup = Top50BabyNames$x, useAlpha = T, optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 2))
+#' X = FPCAdens(dmatrix = t(Top50BabyNames$dens$female), dSup = Top50BabyNames$x, useAlpha = TRUE, 
+#'                   optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 2))
+#' x = Top50BabyNames$x
 #' 
 #' # Plot Modes
 #' 
 #' Qvec = quantile(X$xiEst[,1], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[1])
 #' CreateModeOfVarPlotLQ2D(X, k = 1, dSup = x, Qvec = Qvec, main = 'First Mode, Density space')
-#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 1, dSup = x, Qvec = Qvec, main = 'First Mode, LQD space')
+#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 1, dSup = x, Qvec = Qvec, 
+#'                             main = 'First Mode, LQD space')
 #'
 #' Qvec = quantile(X$xiEst[,2], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[2])
 #' CreateModeOfVarPlotLQ2D(X, k = 2, dSup = x, Qvec = Qvec, main = 'Second Mode, Density Space')
-#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 2, dSup = x, Qvec = Qvec, main = 'Second Mode, LQD space')
+#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 2, dSup = x, Qvec = Qvec, 
+#'                             main = 'Second Mode, LQD space')
 #' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
@@ -44,8 +48,8 @@ FPCAdens = function(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup))
     
   # Perform FPCA
     
-    L = MakeFPCAInputs(tVec = lqdSup, yVec = lqd)
-    X = FPCA(Ly = L$Ly, Lt = L$Lt, optns = optns)
+    L = fdapace::MakeFPCAInputs(tVec = lqdSup, yVec = lqd)
+    X = fdapace::FPCA(Ly = L$Ly, Lt = L$Lt, optns = optns)
     
     return(X)
     
