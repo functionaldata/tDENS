@@ -24,9 +24,8 @@ Function for converting log quantile densities to densities
 }
 \examples{
 x <- seq(0,2,length.out =512)
-y <- rep(0.5,length.out =512)
-y.lqd <- dens2lqd(dens=y, dSup = x) # should equate # -log(1/2)
-y.dens <- lqd2dens(dSup=x, lqd = y.lqd)   
+y.lqd <- rep(log(2), times = 512)
+y <- lqd2dens(dSup=x, lqd = y.lqd) # should equate # 1/2
 }
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}

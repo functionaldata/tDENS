@@ -39,8 +39,10 @@ matplot(y.lqd$lqdSup, t(y.lqd$LQD), ylab = 'LQD', type = 'l', lty = 1, col = 'bl
 
 # Get Densities Back
 
-y.dens = MakeDENsample(y.lqd$LQD, lqdSup = x, dSup = x)
+y.dens = MakeDENsample(y.lqd$LQD, lqdSup = x, dSup = x) # should equate to y above
+# These should look the same
 matplot(y.dens$dSup, t(y.dens$DEN), ylab = 'Density', type = 'l', lty = 1, col = 'blue')
+matplot(x, t(y), ylab = 'Original Density', type = 'l', lty = 1, col = 'red')
 
 }
 \references{

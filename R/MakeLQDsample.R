@@ -9,23 +9,25 @@
 #' @param useAlpha should regularisation be performed (default=FALSE) 
 #' @param alpha Scalar to regularise the supports with (default=0.01)
 #' 
-#' @return list with 'LQD', a matrix of log quantile density functions, and 
+#' @return list with 'LQD', a matrix of log quantile density functions, and 'lqdSup' that matches the input argument
 #' 
 #' @examples  
 #' 
 #' x <- seq(0,1,length.out = 101)
-#' y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) b + 2*(1 - b)*x)) # linear densities on (0, 1)
+#' y <- t(sapply(seq(0.5, 1.5, length.out = 10), function(b) -log(b^2 + 4*(1-b)*x)/2)) # some log quantile densities on (0, 1)
 #' 
-#' # Get LQDs
+#' # Get densities
 #' 
-#' y.lqd = MakeLQDsample(dmatrix = y, dSup = x)
-#' matplot(y.lqd$lqdSup, t(y.lqd$LQD), ylab = 'LQD', type = 'l', lty = 1, col = 'black')
+#' y.dens = MakeDENsample(qmatrix = y, lqdSup = x, dSup = x)$DEN
+#' matplot(x, t(y.dens), ylab = 'Density', type = 'l', lty = 1, col = 'black')
 #' 
-#' # Get Densities Back
+#' # Get LQDs Back
 #' 
-#' y.dens = MakeDENsample(y.lqd$LQD, lqdSup = x, dSup = x)
-#' matplot(y.dens$dSup, t(y.dens$DEN), ylab = 'Density', type = 'l', lty = 1, col = 'blue')
-#'
+#' y.lqd = MakeLQDsample(y.dens, lqdSup = x, dSup = x)
+#' # These should match
+#' matplot(y.lqd$lqdSup, t(y.lqd$LQD), ylab = 'LQD', type = 'l', lty = 1, col = 'blue')
+#' matplot(x, t(y), ylab = 'LQD', type = 'l', lty = 1, col = 'red')
+#' 
 #' @seealso \code{\link{RegulariseByAlpha},\link{dens2lqd}} 
 #' @references
 #'   \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 

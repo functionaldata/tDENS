@@ -25,6 +25,21 @@ FVEvector
 \description{
 Function for converting densities to quantile functions
 }
+\examples{
+
+data(Top50BabyNames)
+
+# Perform Transformation FPCA for male baby name densities
+dSup = Top50BabyNames$x
+X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = T, optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 8))
+
+# Compute FVE - must compare to regularized densities 
+dens.reg = t(apply(Top50BabyNames$dens$male, 2, function(y) RegulariseByAlpha(dSup, y)))
+
+fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup)
+fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W')
+
+}
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
 }

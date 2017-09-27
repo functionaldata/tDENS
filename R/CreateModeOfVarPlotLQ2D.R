@@ -26,26 +26,19 @@
 #' @examples
 #' ## Densities for Top 50 Male Baby Names
 #' data(Top50BabyNames)
-#' m.names = Top50BabyNames$M
-#' 
-#' # Create artificial counts based on relative popularity
-#' y = lapply(m.names, function(n) 100000*n$prop/sum(n$prop))
-#' x = seq(1950,2015,by=1)
-#' m.dens = sapply(y, function(yy) CreateDensity(yy, optns = list(userBwMu = 5, delta = 1, infSupport = F, outputGrid = x))$y)
-#' 
-#' # Compute LQD Transformation and perform FPCA
-#' m.lqd = MakeLQDsample(dmatrix = t(m.dens), alpha = 1e-3, dInput = x)$LQD
-#' L = MakeFPCAInputs(tVec = seq(0, 1, length.out = length(x)), yVec = m.lqd)
-#' X = FPCA(L$Ly, L$Lt, optns = list(dataType = 'Dense', methodSelectK = 2))
+#'
+#' # Perform Transformation FPCA for male baby name densities
+#' X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = Top50BabyNames$x, useAlpha = T, optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 2))
 #' 
 #' # Plot Modes
 #' 
 #' Qvec = quantile(X$xiEst[,1], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[1])
-#' CreateModeOfVarPlotLQ2D(X, k = 1, dSup = x, Qvec = Qvec) # First Mode - Density space
-#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 1, dSup = x, Qvec = Qvec) # First Mode - Density space
+#' CreateModeOfVarPlotLQ2D(X, k = 1, dSup = x, Qvec = Qvec, main = 'First Mode, Density Space')
+#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 1, dSup = x, Qvec = Qvec, main = 'First Mode, LQD space')
 #'
 #' Qvec = quantile(X$xiEst[,2], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[2])
-#' CreateModeOfVarPlotLQ2D(X, k = 2, dSup = x, Qvec = Qvec) # Second Mode
+#' CreateModeOfVarPlotLQ2D(X, k = 2, dSup = x, Qvec = Qvec, main = 'Second Mode, Density Space')
+#' CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 2, dSup = x, Qvec = Qvec, main = 'Second Mode, LQD space')
 #' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 

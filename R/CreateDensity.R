@@ -45,21 +45,21 @@
 
 
 
-CreateDensity <- function(y, optns = list()){
+CreateDensity <- function(y, optns = list()) {
   
-  if(is.null(optns$kernel)){
+  if(is.null(optns$kernel)) {
     kernel = 'gauss'
   } else {
     kernel =  optns$kernel
   }
   
-  if(is.null(optns$delta)){
-    delta = max(c( diff(range(y))/1000, min(diff(sort(unique(y)))) ))
+  if(is.null(optns$delta)) {
+    delta = max(c(diff(range(y))/1000, min(diff(sort(unique(y))))))
   } else {
     delta = optns$delta
   }
   
-  if(is.null(optns$nRegGrid)){
+  if(is.null(optns$nRegGrid)) {
     nRegGrid = 101
   } else {
     nRegGrid = optns$nRegGrid
@@ -71,24 +71,42 @@ CreateDensity <- function(y, optns = list()){
     outputGrid = optns$outputGrid
   }
   
-  if(is.null(optns$infSupport)){
+  if(is.null(optns$infSupport)) {
     infSupport = TRUE
   } else {
     infSupport = optns$infSupport
   }
   
   N = length(y)
-  histgrid = seq( min(y)-delta*0.5, max(y)+delta*0.5, by = delta );
-  if(  (max(y)+delta*0.5) > histgrid[length(histgrid)] ){
-    histgrid[length(histgrid)] =  max(y)+delta*0.5;
+  
+  if(is.null(outputGrid)) {
+    histgrid = seq(min(y) - delta*0.5,
+                   max(y) + delta*0.5,
+                   by = delta);
+  } else {
+    histgrid = seq(min(outputGrid) - delta*0.5,
+                   max(outputGrid) + delta*0.5,
+                   by = delta);
   }
+  
+  if((max(y) + delta*0.5) > histgrid[length(histgrid)]) {
+    histgrid[length(histgrid)] =  max(y) + delta*0.5;
+  }
+  
   M = length(histgrid)
   histObj =  hist(y, breaks = histgrid, plot = FALSE);
-  yin = histObj$counts[1:M-1] / N / delta;
-  xin = seq( min(y), max(y), by = delta);
   
-  if( is.null(optns$userBwMu)){
-    bw = fdapace:::CVLwls1D(y = yin, t = xin, kernel = kernel, npoly = 1, nder = 0, dataType = 'Dense', kFolds = 5)
+  yin = histObj$counts[1:M-1] / N / delta;
+  xin = histObj$mids;
+  
+  if( is.null(optns$userBwMu)) {
+    bw = fdapace:::CVLwls1D(y = yin,
+                            t = xin,
+                            kernel = kernel,
+                            npoly = 1,
+                            nder = 0,
+                            dataType = 'Dense',
+                            kFolds = 5)
   } else {
     bw = optns$userBwMu
   }
@@ -96,22 +114,35 @@ CreateDensity <- function(y, optns = list()){
   densObj <- list()
   densObj$bw <- bw
   densObj$x <- outputGrid
-  if( infSupport ){ 
-    if(is.null(outputGrid)){
-      densObj$x <- seq(min(y)-delta, max(y)+delta, length.out = nRegGrid)
+  
+  if(infSupport) { 
+    if(is.null(outputGrid)) {
+      densObj$x <- seq(min(y) - delta,
+                       max(y) + delta,
+                       length.out = nRegGrid);
     }
-    qpadding = 10
-    mu = fdapace::Lwls1D(bw = bw, kernel_type = kernel, win = rep(1,M+(-1+2*qpadding)), 
-                         xin = c( min(y) - 11:2 *delta, xin, max(y) + 2:11 * delta), yin = c(rep(0,qpadding),yin,rep(0,qpadding)), xout = densObj$x)
+    mu = fdapace::Lwls1D(bw = bw,
+                         kernel_type = kernel,
+                         win = rep(1, M - 1), 
+                         xin = xin,
+                         yin = yin,
+                         xout = densObj$x);
   } else {
-    if(is.null(outputGrid)){
-      densObj$x <- seq(min(y), max(y), length.out = nRegGrid)
+    if(is.null(outputGrid)) {
+      densObj$x <- seq(min(y),
+                       max(y),
+                       length.out = nRegGrid);
     }
-    mu = fdapace::Lwls1D(bw = bw, kernel_type = kernel, win = rep(1,M-1), xin = xin, yin = yin, xout = densObj$x)
+    mu = fdapace::Lwls1D(bw = bw,
+                         kernel_type = kernel,
+                         win = rep(1,M-1),
+                         xin = xin,
+                         yin = yin,
+                         xout = densObj$x);
   }
-  mu[mu<0] = 0;
+  
+  mu[mu < 0] = 0;
   densObj$y = mu / fdapace:::trapzRcpp(densObj$x, mu);
   
-  return(densObj)
-  
+  return(densObj);
 }

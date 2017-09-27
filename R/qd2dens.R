@@ -7,6 +7,12 @@
 #' 
 #' @return dens density values on dSup
 #' 
+#' @examples 
+#' 
+#' x <- seq(0,1,length.out =512)
+#' y <- rep(2,length.out =512)
+#' y.dens <- qd2dens(qd=y, qdSup = x, dSup = seq(0, 2, length.out = 512)) # should equate # 1/2
+#' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export

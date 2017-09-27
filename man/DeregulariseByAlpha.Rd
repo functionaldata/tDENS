@@ -27,8 +27,8 @@ the deregularisation is not possible and an error is thrown.  Otherwise, the der
 \examples{
 
  x = seq(0,1,length.out=122)
- y = seq(0.5,1.5,length.out=122)
- z = DegulariseByAlpha(x=x, y=y, alpha = 0)
+ y = seq(0.1,1.9,length.out=122)
+ z = DeregulariseByAlpha(x=x, y=y, alpha = 0)
  
 }
 \seealso{

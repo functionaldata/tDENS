@@ -13,7 +13,7 @@
 #' the regularisation is not possible and an error is thrown.  Otherwise, the regularised density is computed by adding an appropriate constant \code{gam} \code{y}, 
 #' followed by renormalisation to have integral 1.
 #' 
-#' @return dens density values on dSup
+#' @return dens density values on x
 #' 
 #' @seealso \code{\link{DeregulariseByAlpha}}
 #' 

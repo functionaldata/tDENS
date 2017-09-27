@@ -12,15 +12,15 @@
 #' If \code{min(y) <= alpha}, or \code{y} is the uniform distribution, no deregularisation is performed and \code{y} is returned.  If \code{min(y)*diff(range(x)) > 1}, 
 #' the deregularisation is not possible and an error is thrown.  Otherwise, the deregularised density in an inverse manner to \code{RegulariseByAlpha}.
 #' 
-#' @return dens density values on dSup
+#' @return dens density values on x
 #' 
 #' @seealso \code{\link{RegulariseByAlpha}}
 #' 
 #' @examples
 #' 
 #'  x = seq(0,1,length.out=122)
-#'  y = seq(0.5,1.5,length.out=122)
-#'  z = DegulariseByAlpha(x=x, y=y, alpha = 0)
+#'  y = seq(0.1,1.9,length.out=122)
+#'  z = DeregulariseByAlpha(x=x, y=y, alpha = 0)
 #'  
 #' @export
  

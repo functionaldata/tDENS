@@ -3,6 +3,7 @@
 export(CreateDensity)
 export(CreateModeOfVarPlotLQ2D)
 export(DeregulariseByAlpha)
+export(FPCAdens)
 export(GetFVE)
 export(MakeDENsample)
 export(MakeLQDsample)

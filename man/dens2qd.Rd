@@ -22,6 +22,13 @@ qd quantile density values on qdSup
 \description{
 Function for converting Densities to Quantile Densities
 }
+\examples{
+
+x <- seq(0,2,length.out =512)
+y <- rep(0.5,length.out =512)
+y.qd <- dens2qd(dens=y, dSup = x) # should equate # 2
+
+}
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
 }
