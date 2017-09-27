@@ -19,6 +19,6 @@
 
 fastTrapz <- function(x, y){
   
-  return( fdapace:::trapzRcpp( X = x, Y = y) )
+  return(trapzRcpp( X = x, Y = y) )
   
 }

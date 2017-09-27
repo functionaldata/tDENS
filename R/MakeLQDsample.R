@@ -39,7 +39,7 @@ MakeLQDsample <- function(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(
   #pointsToKeep <-  which(0 < apply(dmatrix, 2, quantile, 0.995))
   #newSupport <- dInput[pointsToKeep]
   #dmatrix2 <- dmatrix[, pointsToKeep];
-  #dmatrix3 <- dmatrix2 / apply(dmatrix2, 1, function(u) fdapace:::trapzRcpp(Y=  u, X = newSupport) )
+  #dmatrix3 <- dmatrix2 / apply(dmatrix2, 1, function(u) trapzRcpp(Y=  u, X = newSupport) )
   
   if(useAlpha){
     tmp <-  t(apply(dmatrix, 1, function(u) RegulariseByAlpha(u, x = dSup, alpha = alpha) ))

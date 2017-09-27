@@ -23,7 +23,7 @@ qd2dens = function(qd, qdSup = seq(0, 1, length.out = length(qd)), dSup, useSpli
     stop("Please check the support of the QD domain's boundaries.")
   }
   
-  if(abs(fdapace:::trapzRcpp(qdSup, qd) - diff(range(dSup)) > 1e-5)){
+  if(abs(trapzRcpp(qdSup, qd) - diff(range(dSup)) > 1e-5)){
     stop("Quantile Density should integrate to the range of dSup.")
   }
   
@@ -34,7 +34,7 @@ qd2dens = function(qd, qdSup = seq(0, 1, length.out = length(qd)), dSup, useSpli
     dtemp = dSup[1] + c(0, cumsum(sapply(2:length(qdSup), function(i) integrate(qd_sp, qdSup[i - 1], qdSup[i])$value)))
   } else {
     # Get grid and function for density space
-    dtemp = dSup[1] + fdapace:::cumtrapzRcpp(qdSup, qd)
+    dtemp = dSup[1] + cumtrapzRcpp(qdSup, qd)
   }
 
   dens_temp = 1/qd;
@@ -45,7 +45,7 @@ qd2dens = function(qd, qdSup = seq(0, 1, length.out = length(qd)), dSup, useSpli
   
   # Interpolate to dSup and normalize
   dens = approx(x = dtemp, y = dens_temp[!ind], xout = dSup, rule = c(2,2))[[2]]
-  dens = dens/fdapace:::trapzRcpp(X = dSup,Y = dens); # Normalize
+  dens = dens/trapzRcpp(X = dSup,Y = dens); # Normalize
 
   return(dens)
 }

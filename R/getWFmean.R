@@ -31,7 +31,7 @@ getWFmean = function(dens, dSup, N = length(dSup), qdSup = NULL){
     qdSup = seq(0, 1, length.out = N)
   }
   
-  if(any(apply(dens, 1, function(d) abs(fdapace:::trapzRcpp(dSup, d) - 1) > 1e-5))){
+  if(any(apply(dens, 1, function(d) abs(trapzRcpp(dSup, d) - 1) > 1e-5))){
     stop('Densities must all integrate to 1.')
   }
   

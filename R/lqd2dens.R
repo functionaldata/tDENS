@@ -29,7 +29,7 @@ lqd2dens = function(lqd, lqdSup = seq(0, 1, length.out = length(lqd)), dSup, use
     dtemp = dSup[1] + c(0, cumsum(sapply(2:length(lqdSup), function(i) integrate(lqd_exp, lqdSup[i - 1], lqdSup[i])$value)))
   } else {
     # Get grid and function for density space
-    dtemp = dSup[1] + fdapace:::cumtrapzRcpp(lqdSup, exp(lqd))
+    dtemp = dSup[1] + cumtrapzRcpp(lqdSup, exp(lqd))
   }
 
   dens_temp = exp(-lqd);
@@ -45,7 +45,7 @@ lqd2dens = function(lqd, lqdSup = seq(0, 1, length.out = length(lqd)), dSup, use
   
   # Interpolate to dSup and normalize
   dens = approx(x = dtemp, y = dens_temp[!ind], xout = dSup, rule = c(2,2))[[2]]
-  dens = dens/fdapace:::trapzRcpp(X = dSup,Y = dens); # Normalize
+  dens = dens/trapzRcpp(X = dSup,Y = dens); # Normalize
 
   return(dens)
 }

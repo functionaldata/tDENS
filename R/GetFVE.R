@@ -40,16 +40,16 @@ GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha
     mu_dens = colMeans(dmatrix)
     #pointsToKeep <-  which(0 < apply(dmatrix, 2, quantile, 0.995))
   
-    vtot = mean(apply(dmatrix, 1, function(u) fdapace:::trapzRcpp(X = dSup, Y = (u - mu_dens)^2)))
+    vtot = mean(apply(dmatrix, 1, function(u) trapzRcpp(X = dSup, Y = (u - mu_dens)^2)))
     K = length(fpcaObj$lambda)
     FVEs = rep(0, K)
     # print(K)
   
     for(k in 1:K){
       #print(k)
-      fittedKQ <- fdapace:::fitted.FPCA(K=k, fpcaObj);
+      fittedKQ <- fitted(K=k, fpcaObj);
       fittedKD <- MakeDENsample(fittedKQ, alpha = alpha, dSup = dSup, useAlpha = useAlpha) 
-      vK <- mean(apply((dmatrix -  fittedKD$DEN)^2, 1, function(u) fdapace:::trapzRcpp(X = dSup, Y = u)))
+      vK <- mean(apply((dmatrix -  fittedKD$DEN)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
       FVEs[k] <- (vtot - vK)/vtot 
     }
   }else {
@@ -57,15 +57,15 @@ GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha
     Qmatrix = t(apply(dmatrix, 1, function(d) dens2quantile(d, dSup)))
     mu_Q = colMeans(Qmatrix)
     
-    vtot = mean(apply(Qmatrix, 1, function(u) fdapace:::trapzRcpp(X = dSup, Y = (u - mu_Q)^2)))
+    vtot = mean(apply(Qmatrix, 1, function(u) trapzRcpp(X = dSup, Y = (u - mu_Q)^2)))
     K = length(fpcaObj$lambda)
     FVEs = rep(0, K)
     
     for(k in 1:K){
-      fittedKQ <- fdapace:::fitted.FPCA(K=k, fpcaObj);
+      fittedKQ <- fitted(K=k, fpcaObj);
       fittedKD <- MakeDENsample(fittedKQ, alpha = alpha, dSup = dSup, useAlpha = useAlpha)
       fittedKQ2 <- t(apply(fittedKD$DEN, 1, function(d) dens2quantile(d, dSup)))
-      vK <- mean(apply((Qmatrix -  fittedKQ2)^2, 1, function(u) fdapace:::trapzRcpp(X = dSup, Y = u)))
+      vK <- mean(apply((Qmatrix -  fittedKQ2)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
       FVEs[k] <- (vtot - vK)/vtot  
     }
     

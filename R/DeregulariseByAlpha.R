@@ -26,7 +26,7 @@
  
 DeregulariseByAlpha <- function(x,y,alpha=0){
 
-  if(abs(fdapace:::trapzRcpp(x, y) - 1) > 1e-5 || min(y) < 0){
+  if(abs(trapzRcpp(x, y) - 1) > 1e-5 || min(y) < 0){
     stop('y must be a density!')
   }
   

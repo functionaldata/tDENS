@@ -23,7 +23,7 @@ dens2quantile = function(dens, dSup = seq(0, 1, length.out = length(dens)), qSup
     stop("Please check the support of the Q domain's boundaries.")
   }
   
-  if(abs(fdapace:::trapzRcpp(dSup, dens) - 1) > 1e-5){
+  if(abs(trapzRcpp(dSup, dens) - 1) > 1e-5){
     stop("Density should integrate to one.")
   }
   
@@ -34,7 +34,7 @@ dens2quantile = function(dens, dSup = seq(0, 1, length.out = length(dens)), qSup
     QSuptmp = c(0, cumsum(sapply(2:length(dSup), function(i) integrate(dens_sp, dSup[i - 1], dSup[i])$value)))
   } else {
     # Get grid and function for density space
-    QSuptmp = fdapace:::cumtrapzRcpp(dSup, dens)
+    QSuptmp = cumtrapzRcpp(dSup, dens)
   }
 
   Qtmp = dSup

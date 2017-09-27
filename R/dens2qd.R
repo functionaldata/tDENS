@@ -27,7 +27,7 @@ dens2qd = function(dens, dSup = seq(0, 1, length.out = length(dens)), qdSup = se
     stop("Please check the support of the QD domain's boundaries.")
   }
   
-  if(abs(fdapace:::trapzRcpp(dSup, dens) - 1) > 1e-5){
+  if(abs(trapzRcpp(dSup, dens) - 1) > 1e-5){
     stop("Density should integrate to one.")
   }
   
@@ -38,7 +38,7 @@ dens2qd = function(dens, dSup = seq(0, 1, length.out = length(dens)), qdSup = se
     qdtemp = c(0, cumsum(sapply(2:length(dSup), function(i) integrate(dens_sp, dSup[i - 1], dSup[i])$value)))
   } else {
     # Get grid and function for density space
-    qdtemp = fdapace:::cumtrapzRcpp(dSup, dens)
+    qdtemp = cumtrapzRcpp(dSup, dens)
   }
 
   qdens_temp = 1/dens;
@@ -49,7 +49,7 @@ dens2qd = function(dens, dSup = seq(0, 1, length.out = length(dens)), qdSup = se
   
   # Interpolate to qdSup
   qd = approx(x = qdtemp, y = qdens_temp[!ind], xout = qdSup, rule = c(2,2))[[2]]
-  qd = qd*diff(range(dSup))/fdapace:::trapzRcpp(X = qdSup,Y = qd); # Normalize
+  qd = qd*diff(range(dSup))/trapzRcpp(X = qdSup,Y = qd); # Normalize
 
   return(qd)
 }

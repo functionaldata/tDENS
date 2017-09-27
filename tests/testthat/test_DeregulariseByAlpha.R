@@ -6,6 +6,6 @@ test_that('DeegulariseByAlpha works on a trivial example, Beta(2,1))', {
   z = RegulariseByAlpha(x=x, y=y, alpha = 0.1)
   yNew = DeregulariseByAlpha(x=x, y=z, alpha = 0)
   
-  expect_equal( 1 , fdapace:::trapzRcpp(x,Y = yNew) )
+  expect_equal( 1 , trapzRcpp(x,Y = yNew) )
   expect_equal( y, yNew , tol = 1e-10)
 })

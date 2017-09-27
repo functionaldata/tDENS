@@ -25,7 +25,7 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqdSup = NULL){
   if(any(dens<=0)){
     stop('Please correct negative or zero probability density estimates.')
   }  
-  if(abs( fdapace:::trapzRcpp(X = dSup, dens) - 1) > 1e-5){
+  if(abs( trapzRcpp(X = dSup, dens) - 1) > 1e-5){
     stop('Density does not integrate to 1 with tolerance of 1e-5 - please adjust.')
   }
   if(!all.equal( range(lqdSup),c(0,1) )){
@@ -33,7 +33,7 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqdSup = NULL){
   }
  
   # Get CDF  
-  qtemp = fdapace:::cumtrapzRcpp(X = dSup, dens)
+  qtemp = cumtrapzRcpp(X = dSup, dens)
   # ind = duplicated(qtemp)
   # qtemp = unique(qtemp)
   # lqd_temp = -log(dens[!ind]);
