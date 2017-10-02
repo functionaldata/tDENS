@@ -9,15 +9,15 @@ GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0)
 \arguments{
 \item{fpcaObj}{PACE output (FPCA on LQDs)}
 
-\item{dmatrix}{matrix of original densities measures on grid dout, rows correspond to individual densities}
+\item{dmatrix}{matrix of original densities measures on grid dSup, rows correspond to individual densities}
 
 \item{dSup}{support for Density domain - max and min mark the boundary of the support.}
 
 \item{metric}{metric for measuring variance - 'L2' for Euclidean or 'W' for Wasserstein}
 
-\item{useAlpha}{should deregularisation be performed? (default = FALSE)}
+\item{useAlpha}{should regularisation be performed to densities in dmatrix? (default = FALSE)}
 
-\item{alpha}{scalar to deregularise when transforming back to density space with (default = 0)}
+\item{alpha}{scalar to deregularise when transforming back to density space with (default = 0.01)}
 }
 \value{
 FVEvector
@@ -35,15 +35,14 @@ X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE
                    optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 8))
 
 # Compute FVE - must compare to regularized densities 
-dens.reg = t(apply(Top50BabyNames$dens$male, 2, function(y) RegulariseByAlpha(dSup, y)))
 
-fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup)
-fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W')
+fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, useAlpha = TRUE)
+fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W', useAlpha = TRUE)
 
 }
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
 }
 \seealso{
-\code{\link{lqd2dens},\link{DeregulariseByAlpha}}
+\code{\link{RegulariseByAlpha},\link{lqd2quantile}}
 }

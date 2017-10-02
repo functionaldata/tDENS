@@ -5,15 +5,15 @@ Type: Package
 Title: Functional Data Analysis for Density Functions by Transformation to a
     Hilbert Space
 Version: 0.1.0
-Date: 2017-09-13
+Date: 2017-10-02
 Author: A. Petersen, P. Z. Hadjipantelis and H.G. Mueller
 Maintainer: Alexander Petersen <petersen@pstat.ucsb.edu>
 Description: Functional Data Analysis for Density Functions by Transformation to
     a Hilbert space. A "better" domain idea.
-Depends: R (>= 3.3.1) 
+Depends: R (>= 3.3.1)
 License: BSD_3_clause + file LICENSE
 LazyData: false
-Imports: Rcpp (>= 0.11.5), 
+Imports: Rcpp (>= 0.11.5),
   fdapace (>= 0.3.0)
 LinkingTo: Rcpp
 NeedsCompilation: yes
