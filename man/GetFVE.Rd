@@ -37,7 +37,8 @@ X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE
 # Compute FVE - must compare to regularized densities 
 
 fve.L2 = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE)
-fve.W = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, metric = 'W', useAlpha = TRUE)
+fve.W = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, 
+                   metric = 'W', useAlpha = TRUE)
 
 }
 \references{
