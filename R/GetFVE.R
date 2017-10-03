@@ -20,8 +20,8 @@
 #'
 #' # Compute FVE - must compare to regularized densities 
 #' 
-#' fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, useAlpha = TRUE)
-#' fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W', useAlpha = TRUE)
+#' #fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, useAlpha = TRUE)
+#' #fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W', useAlpha = TRUE)
 #' 
 #' @seealso \code{\link{RegulariseByAlpha},\link{lqd2quantile}}
 #' 

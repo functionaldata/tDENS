@@ -15,3 +15,11 @@ export(getWFmean)
 export(lqd2dens)
 export(lqd2quantile)
 export(qd2dens)
+
+import(Rcpp)
+importFrom("grDevices", "colorRampPalette")                                                               
+importFrom("graphics", "grid", "legend", "lines", "matplot")
+importFrom("stats", "approx", "integrate", "spline", "splinefun", "fitted")
+
+useDynLib(fdadensity)
+

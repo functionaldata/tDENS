@@ -29,7 +29,7 @@ lqd2quantile = function(lqd, lqdSup = seq(0, 1, length.out = length(lqd)), lb = 
     Q = lb + c(0, cumsum(sapply(2:length(lqdSup), function(i) integrate(lqd_exp, lqdSup[i - 1], lqdSup[i])$value)))
   } else {
     # Get grid and function for density space
-    Q = lb + fdapace:::cumtrapzRcpp(lqdSup, exp(lqd))
+    Q = lb + cumtrapzRcpp(lqdSup, exp(lqd))
   }
   
   return(Q)
