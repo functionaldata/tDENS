@@ -20,8 +20,8 @@
 #'
 #' # Compute FVE - must compare to regularized densities 
 #' 
-#' #fve.L2 = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, useAlpha = TRUE)
-#' #fve.W = GetFVE(fpcaObj = X, dmatrix = dens.reg, dSup = dSup, metric = 'W', useAlpha = TRUE)
+#' fve.L2 = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE)
+#' fve.W = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, metric = 'W', useAlpha = TRUE)
 #' 
 #' @seealso \code{\link{RegulariseByAlpha},\link{lqd2quantile}}
 #' 
@@ -68,7 +68,7 @@ GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha
     for(k in 1:K){
       fittedK.lqd <- fitted(K=k, fpcaObj);
       fittedKQ <- t(apply(fittedK.lqd, 1, function(y) lqd2quantile(lqd = y, lb = dSup[1])))
-      vK <- mean(apply((Qmatrix -  fittedKQ2)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
+      vK <- mean(apply((Qmatrix -  fittedKQ)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
       FVEs[k] <- (vtot - vK)/vtot  
     }
     
