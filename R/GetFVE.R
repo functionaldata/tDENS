@@ -20,8 +20,8 @@
 #'
 #' # Compute FVE - must compare to regularized densities 
 #' 
-#' fve.L2 = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE)
-#' fve.W = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, 
+#' fveL2 = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE)
+#' fveW = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, 
 #'                    metric = 'W', useAlpha = TRUE)
 #' 
 #' @seealso \code{\link{RegulariseByAlpha},\link{lqd2quantile}}
