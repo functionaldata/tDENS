@@ -49,7 +49,7 @@
 
 #' @export
 
-CreateModeOfVarPlotLQ2D <-function(fpcaObj, domain = 'D', k = 1, dSup = NULL, Qvec = -2:2, alpha = 0, useAlpha = F, ...){  
+CreateModeOfVarPlotLQ2D <-function(fpcaObj, domain = 'D', k = 1, dSup = NULL, Qvec = -2:2, alpha = 0, useAlpha = FALSE, ...){  
   
   if (!any(domain %in% c('D','Q'))){
     stop("Invalid domain option.")

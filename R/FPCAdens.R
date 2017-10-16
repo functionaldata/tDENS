@@ -40,7 +40,7 @@
 
 #' @export
 
-FPCAdens = function(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup)), useAlpha = F, alpha = 0.01, optns = list(dataType = 'Dense', error = FALSE)){
+FPCAdens = function(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup)), useAlpha = FALSE, alpha = 0.01, optns = list(dataType = 'Dense', error = FALSE)){
   
   # Transform Densities
   

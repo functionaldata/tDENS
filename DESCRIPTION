@@ -5,16 +5,25 @@ Type: Package
 Title: Functional Data Analysis for Density Functions by Transformation to a
     Hilbert Space
 Version: 0.1.0
-Date: 2017-10-02
+Date: 2017-10-16
 Author: A. Petersen, P. Z. Hadjipantelis and H.G. Mueller
 Maintainer: Alexander Petersen <petersen@pstat.ucsb.edu>
-Description: Functional Data Analysis for Density Functions by Transformation to
-    a Hilbert space. A "better" domain idea.
+Description: An implementation of the methodology described in
+    Petersen and Mueller (2016) <doi:10.1214/15-AOS1363> for the functional
+    data analysis of samples of density functions.  Densities are first
+    transformed to their corresponding log quantile densities, followed by
+    ordinary Functional Principal Components Analysis (FPCA).  Transformation
+    modes of variation yield improved interpretation of the variability in the
+    data as compared to FPCA on the densities themselves.  The standard
+    fraction of variance explained (FVE) criterion commonly used for functional
+    data is adapted to the transformation setting, also allowing for an
+    alternative quantification of variability for density data through the
+    Wasserstein metric of optimal transport.
 Depends: R (>= 3.3.1)
 License: BSD_3_clause + file LICENSE
 LazyData: false
 Imports: Rcpp (>= 0.11.5),
-  fdapace (>= 0.3.0)
+    fdapace (>= 0.3.0)
 LinkingTo: Rcpp
 NeedsCompilation: yes
 Suggests: testthat
