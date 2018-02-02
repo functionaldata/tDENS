@@ -1,9 +1,13 @@
+#' Wasserstein Frechet Mean Computation
+#' 
 #' Function for computing the Wasserstein Frechet mean through quantile density averaging
 #' 
-#' @param dens matrix of density values on dSup - must be strictly positive and each row must integrate to 1
+#' @param dmatrix matrix of density values on dSup - must be strictly positive and each row must integrate to 1
 #' @param dSup support (grid) for Density domain
 #' @param qdSup support for LQ domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points
 #' @param N desired number of points on a [0,1] grid for quantile density functions; default length(dSup)
+#' @param useAlpha should regularisation be performed (default=FALSE) 
+#' @param alpha Scalar to regularise the supports with (default=0.01)
 #' 
 #' @return wfmean the Wasserstein-Frechet mean density
 #' 
@@ -25,17 +29,18 @@
 #' @export
 #' 
 
-getWFmean = function(dens, dSup, N = length(dSup), qdSup = NULL){
+getWFmean = function(dmatrix, dSup, N = length(dSup), qdSup = seq(0, 1, length.out = N), useAlpha = FALSE, alpha = 0.01){
   
-  if(is.null(qdSup)){
-    qdSup = seq(0, 1, length.out = N)
+  if(useAlpha){
+    tmp <-  t(apply(dmatrix, 1, function(u) RegulariseByAlpha(u, x = dSup, alpha = alpha) ))
+    dmatrix <- tmp
   }
   
-  if(any(apply(dens, 1, function(d) abs(trapzRcpp(dSup, d) - 1) > 1e-5))){
+  if(any(apply(dmatrix, 1, function(d) abs(trapzRcpp(dSup, d) - 1) > 1e-5))){
     stop('Densities must all integrate to 1.')
   }
   
-  qd = t(apply(dens, 1, function(d) dens2qd(d, dSup = dSup, qdSup = qdSup)))
+  qd = t(apply(dmatrix, 1, function(d) dens2qd(d, dSup = dSup, qdSup = qdSup)))
   
   wfmean = qd2dens(colMeans(qd), dSup = dSup, qdSup = qdSup)
   

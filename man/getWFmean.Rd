@@ -2,7 +2,7 @@
 % Please edit documentation in R/getWFmean.R
 \name{getWFmean}
 \alias{getWFmean}
-\title{Function for computing the Wasserstein Frechet mean through quantile density averaging}
+\title{Wasserstein Frechet Mean Computation}
 \usage{
 getWFmean(dens, dSup, N = length(dSup), qdSup = NULL)
 }

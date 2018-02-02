@@ -1,13 +1,20 @@
-#' Function for converting densities to quantile functions 
+#' Compute Metric-based Fraction of Variance Explained 
+#' 
+#' When FPCA is performed on the log quantile density functions, the fraction of variance explained by the first K components is computed based on 
+#' the density reconstruction and chosen metric.
 #' 
 #' @param fpcaObj PACE output (FPCA on LQDs)
 #' @param dmatrix matrix of original densities measures on grid dSup, rows correspond to individual densities
 #' @param dSup support for Density domain - max and min mark the boundary of the support. 
 #' @param metric metric for measuring variance - 'L2' for Euclidean or 'W' for Wasserstein
-#' @param useAlpha should regularisation be performed to densities in dmatrix? (default = FALSE)
-#' @param alpha scalar to deregularise when transforming back to density space with (default = 0.01)
+#' @param useAlpha should regularisation be performed to densities in dmatrix? This should be set to TRUE if densities were regularised prior to FPCA (default = FALSE)
+#' @param alpha scalar to regularise before computing FVE.  If useAlpha = TRUE, this should match the value used to regularise prior to FPCA (default = 0.01)
 #' 
 #' @return FVEvector
+#' 
+#' @details The fraction of variance explained (FVE) by the first K principal components corresponding to the LQD functions is computed by taking the K-dimensional
+#' LQD representations, transforming back to densities, and comparing the reconstruction to the original densities using the chosen metric.  If densities were regularised
+#' prior to transformation and FPCA, the same regularisation parameters should be used here.
 #' 
 #' @examples 
 #' 
@@ -30,15 +37,15 @@
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export
 
-GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha=0){
+GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha=0.1){
   
   if(!(metric %in% c('L2', 'W'))){
     stop('Unrecognized value for metric input.')
   }
   
   if(useAlpha){
-    tmp = t(apply(dmatrix, 1, function(d) RegulariseByAlpha(dSup, d)))
-    dmatrix = tmp
+    tmp <-  t(apply(dmatrix, 1, function(u) RegulariseByAlpha(u, x = dSup, alpha = alpha) ))
+    dmatrix <- tmp
   }
   
   if(metric == 'L2'){
@@ -53,7 +60,7 @@ GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha
     for(k in 1:K){
       #print(k)
       fittedKQ <- fitted(K=k, fpcaObj);
-      fittedKD <- MakeDENsample(fittedKQ, alpha = alpha, dSup = dSup, useAlpha = useAlpha) 
+      fittedKD <- MakeDENsample(fittedKQ, dSup = dSup) # Don't deregularise for FVE computation 
       vK <- mean(apply((dmatrix -  fittedKD$DEN)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
       FVEs[k] <- (vtot - vK)/vtot 
     }

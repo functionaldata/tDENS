@@ -2,9 +2,10 @@
 % Please edit documentation in R/GetFVE.R
 \name{GetFVE}
 \alias{GetFVE}
-\title{Function for converting densities to quantile functions}
+\title{Compute Metric-based Fraction of Variance Explained}
 \usage{
-GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0)
+GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE,
+  alpha = 0.1)
 }
 \arguments{
 \item{fpcaObj}{PACE output (FPCA on LQDs)}
@@ -15,15 +16,21 @@ GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0)
 
 \item{metric}{metric for measuring variance - 'L2' for Euclidean or 'W' for Wasserstein}
 
-\item{useAlpha}{should regularisation be performed to densities in dmatrix? (default = FALSE)}
+\item{useAlpha}{should regularisation be performed to densities in dmatrix? This should be set to TRUE if densities were regularised prior to FPCA (default = FALSE)}
 
-\item{alpha}{scalar to deregularise when transforming back to density space with (default = 0.01)}
+\item{alpha}{scalar to regularise before computing FVE.  If useAlpha = TRUE, this should match the value used to regularise prior to FPCA (default = 0.01)}
 }
 \value{
 FVEvector
 }
 \description{
-Function for converting densities to quantile functions
+When FPCA is performed on the log quantile density functions, the fraction of variance explained by the first K components is computed based on 
+the density reconstruction and chosen metric.
+}
+\details{
+The fraction of variance explained (FVE) by the first K principal components corresponding to the LQD functions is computed by taking the K-dimensional
+LQD representations, transforming back to densities, and comparing the reconstruction to the original densities using the chosen metric.  If densities were regularised
+prior to transformation and FPCA, the same regularisation parameters should be used here.
 }
 \examples{
 
