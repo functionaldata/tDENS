@@ -4,16 +4,21 @@
 \alias{getWFmean}
 \title{Wasserstein Frechet Mean Computation}
 \usage{
-getWFmean(dens, dSup, N = length(dSup), qdSup = NULL)
+getWFmean(dmatrix, dSup, N = length(dSup), qdSup = seq(0, 1, length.out =
+  N), useAlpha = FALSE, alpha = 0.01)
 }
 \arguments{
-\item{dens}{matrix of density values on dSup - must be strictly positive and each row must integrate to 1}
+\item{dmatrix}{matrix of density values on dSup - must be strictly positive and each row must integrate to 1}
 
 \item{dSup}{support (grid) for Density domain}
 
 \item{N}{desired number of points on a [0,1] grid for quantile density functions; default length(dSup)}
 
 \item{qdSup}{support for LQ domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points}
+
+\item{useAlpha}{should regularisation be performed (default=FALSE)}
+
+\item{alpha}{Scalar to regularise the supports with (default=0.01)}
 }
 \value{
 wfmean the Wasserstein-Frechet mean density
