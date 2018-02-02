@@ -37,7 +37,7 @@
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export
 
-GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha=0.1){
+GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha=0.01){
   
   if(!(metric %in% c('L2', 'W'))){
     stop('Unrecognized value for metric input.')
