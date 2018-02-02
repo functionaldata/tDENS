@@ -31,13 +31,14 @@
 
 getWFmean = function(dmatrix, dSup, N = length(dSup), qdSup = seq(0, 1, length.out = N), useAlpha = FALSE, alpha = 0.01){
   
-  if(useAlpha){
-    tmp <-  t(apply(dmatrix, 1, function(u) RegulariseByAlpha(u, x = dSup, alpha = alpha) ))
-    dmatrix <- tmp
-  }
   
   if(any(apply(dmatrix, 1, function(d) abs(trapzRcpp(dSup, d) - 1) > 1e-5))){
     stop('Densities must all integrate to 1.')
+  }
+
+  if(useAlpha){
+    tmp <-  t(apply(dmatrix, 1, function(u) RegulariseByAlpha(u, x = dSup, alpha = alpha) ))
+    dmatrix <- tmp
   }
   
   qd = t(apply(dmatrix, 1, function(d) dens2qd(d, dSup = dSup, qdSup = qdSup)))
