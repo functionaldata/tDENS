@@ -30,7 +30,7 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqdSup = NULL){
   }  
   if(abs( trapzRcpp(X = dSup, dens) - 1) > 1e-5){
     warning('Density does not integrate to 1 with tolerance of 1e-5 - renormalizing now.')
-    dens = dens/trapzRcpp(x = dSup, y = dens)
+    dens = dens/trapzRcpp(X = dSup, Y = dens)
   }
  
   # Get CDF  
