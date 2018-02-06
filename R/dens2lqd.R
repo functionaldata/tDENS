@@ -19,6 +19,9 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqdSup = NULL){
 
   if(is.null(lqdSup)){
       lqdSup = seq(0, 1, length.out = N)
+  }else if(!all.equal( range(lqdSup),c(0,1) )){
+      warning("Problem with support of the LQD domain's boundaries - resetting to default.")
+      lqdSup = seq(0, 1, length.out = N)
   }
 
   # Check density requirements
@@ -26,10 +29,8 @@ dens2lqd = function(dens, dSup, N = length(dSup), lqdSup = NULL){
     stop('Please correct negative or zero probability density estimates.')
   }  
   if(abs( trapzRcpp(X = dSup, dens) - 1) > 1e-5){
-    stop('Density does not integrate to 1 with tolerance of 1e-5 - please adjust.')
-  }
-  if(!all.equal( range(lqdSup),c(0,1) )){
-    stop("Please check the support of the LQD domain's boundaries.")
+    warning('Density does not integrate to 1 with tolerance of 1e-5 - renormalizing now.')
+    dens = dens/trapzRcpp(x = dSup, y = dens)
   }
  
   # Get CDF  

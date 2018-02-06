@@ -24,11 +24,13 @@ dens2qd = function(dens, dSup = seq(0, 1, length.out = length(dens)), qdSup = se
   } 
   
   if(!all.equal( range(qdSup),c(0,1) )){
-    stop("Please check the support of the QD domain's boundaries.")
+    warning("Problem with support of the QD domain's boundaries - resetting to default.")
+    qdSup = seq(0, 1, length.out = length(dens))
   }
   
-  if(abs(trapzRcpp(dSup, dens) - 1) > 1e-5){
-    stop("Density should integrate to one.")
+  if(abs( trapzRcpp(X = dSup, dens) - 1) > 1e-5){
+    warning('Density does not integrate to 1 with tolerance of 1e-5 - renormalizing now.')
+    dens = dens/trapzRcpp(x = dSup, y = dens)
   }
   
   if( useSplines ){

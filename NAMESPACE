@@ -10,16 +10,14 @@ export(RegulariseByAlpha)
 export(dens2lqd)
 export(dens2qd)
 export(dens2quantile)
-export(fastTrapz)
 export(getWFmean)
 export(lqd2dens)
 export(lqd2quantile)
 export(qd2dens)
 
 import(Rcpp)
-importFrom("grDevices", "colorRampPalette")                                                               
+importFrom("grDevices", "colorRampPalette")
 importFrom("graphics", "grid", "legend", "lines", "matplot")
 importFrom("stats", "approx", "integrate", "spline", "splinefun", "fitted")
 
 useDynLib(fdadensity)
-
