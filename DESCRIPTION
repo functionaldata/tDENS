@@ -19,7 +19,7 @@ Description: An implementation of the methodology described in
     data is adapted to the transformation setting, also allowing for an
     alternative quantification of variability for density data through the
     Wasserstein metric of optimal transport.
-Depends: R (>= 3.3.1)
+Depends: R (>= 3.3.0)
 License: BSD_3_clause + file LICENSE
 LazyData: false
 Imports: Rcpp (>= 0.11.5),
