@@ -4,8 +4,7 @@
 \alias{GetFVE}
 \title{Compute Metric-based Fraction of Variance Explained}
 \usage{
-GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE,
-  alpha = 0.01)
+GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0.01)
 }
 \arguments{
 \item{fpcaObj}{PACE output (FPCA on LQDs)}

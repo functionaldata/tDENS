@@ -4,9 +4,13 @@
 \alias{MakeDENsample}
 \title{Convenience function for converting log quantile densities to densities}
 \usage{
-MakeDENsample(qmatrix, lqdSup = seq(0, 1, length.out = ncol(qmatrix)),
-  dSup = seq(0, 1, length.out = ncol(qmatrix)), useAlpha = FALSE,
-  alpha = 0)
+MakeDENsample(
+  qmatrix,
+  lqdSup = seq(0, 1, length.out = ncol(qmatrix)),
+  dSup = seq(0, 1, length.out = ncol(qmatrix)),
+  useAlpha = FALSE,
+  alpha = 0
+)
 }
 \arguments{
 \item{qmatrix}{Matrix holding the log quantile density values on [0,1]}

@@ -4,8 +4,12 @@
 \alias{dens2quantile}
 \title{Function for converting Densities to Quantile Functions}
 \usage{
-dens2quantile(dens, dSup = seq(0, 1, length.out = length(dens)),
-  qSup = seq(0, 1, length.out = length(dens)), useSplines = TRUE)
+dens2quantile(
+  dens,
+  dSup = seq(0, 1, length.out = length(dens)),
+  qSup = seq(0, 1, length.out = length(dens)),
+  useSplines = TRUE
+)
 }
 \arguments{
 \item{dens}{density on dSup}
@@ -31,4 +35,7 @@ y.quantile <- dens2quantile(dens=y, dSup = x) # should equate # 2*seq(0, 1, leng
 }
 \references{
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{normaliseDensities}}
 }

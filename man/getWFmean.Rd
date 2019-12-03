@@ -4,8 +4,14 @@
 \alias{getWFmean}
 \title{Wasserstein Frechet Mean Computation}
 \usage{
-getWFmean(dmatrix, dSup, N = length(dSup), qdSup = seq(0, 1, length.out =
-  N), useAlpha = FALSE, alpha = 0.01)
+getWFmean(
+  dmatrix,
+  dSup,
+  N = length(dSup),
+  qdSup = seq(0, 1, length.out = N),
+  useAlpha = FALSE,
+  alpha = 0.01
+)
 }
 \arguments{
 \item{dmatrix}{matrix of density values on dSup - must be strictly positive and each row must integrate to 1}

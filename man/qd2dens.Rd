@@ -4,8 +4,12 @@
 \alias{qd2dens}
 \title{Function for converting Quantile Densities to Densities}
 \usage{
-qd2dens(qd, qdSup = seq(0, 1, length.out = length(qd)), dSup,
-  useSplines = TRUE)
+qd2dens(
+  qd,
+  qdSup = seq(0, 1, length.out = length(qd)),
+  dSup,
+  useSplines = TRUE
+)
 }
 \arguments{
 \item{qd}{quantile density on qdSup}

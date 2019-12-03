@@ -4,8 +4,16 @@
 \alias{CreateModeOfVarPlotLQ2D}
 \title{Transformation Mode of Variation Plot}
 \usage{
-CreateModeOfVarPlotLQ2D(fpcaObj, domain = "D", k = 1, dSup = NULL,
-  Qvec = -2:2, alpha = 0, useAlpha = FALSE, ...)
+CreateModeOfVarPlotLQ2D(
+  fpcaObj,
+  domain = "D",
+  k = 1,
+  dSup = NULL,
+  Qvec = -2:2,
+  alpha = 0,
+  useAlpha = FALSE,
+  ...
+)
 }
 \arguments{
 \item{fpcaObj}{An FPCA class object returned by FPCA() on the log quantile density functions.}

@@ -13,6 +13,7 @@ export(dens2quantile)
 export(getWFmean)
 export(lqd2dens)
 export(lqd2quantile)
+export(normaliseDensities)
 export(qd2dens)
 
 import(Rcpp)

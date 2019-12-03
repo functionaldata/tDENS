@@ -33,5 +33,5 @@ followed by renormalisation to have integral 1.
  
 }
 \seealso{
-\code{\link{DeregulariseByAlpha}}
+\code{\link{DeregulariseByAlpha},\link{normaliseDensities}}
 }

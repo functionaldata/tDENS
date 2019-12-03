@@ -4,8 +4,8 @@ BugReports: https://github.com/functionaldata/tDENS/issues
 Type: Package
 Title: Functional Data Analysis for Density Functions by Transformation to a
     Hilbert Space
-Version: 0.1.1
-Date: 2018-02-02
+Version: 0.1.2
+Date: 2019-12-03
 Author: A. Petersen, P. Z. Hadjipantelis and H.G. Mueller
 Maintainer: Alexander Petersen <petersen@pstat.ucsb.edu>
 Description: An implementation of the methodology described in
@@ -27,4 +27,5 @@ Imports: Rcpp (>= 0.11.5),
 LinkingTo: Rcpp
 NeedsCompilation: yes
 Suggests: testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 7.0.2
+Encoding: UTF-8

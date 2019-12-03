@@ -4,8 +4,12 @@
 \alias{lqd2dens}
 \title{Function for converting log quantile densities to densities}
 \usage{
-lqd2dens(lqd, lqdSup = seq(0, 1, length.out = length(lqd)), dSup,
-  useSplines = TRUE)
+lqd2dens(
+  lqd,
+  lqdSup = seq(0, 1, length.out = length(lqd)),
+  dSup,
+  useSplines = TRUE
+)
 }
 \arguments{
 \item{lqd}{log quantile density on lqdSup}

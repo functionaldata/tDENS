@@ -4,8 +4,13 @@
 \alias{MakeLQDsample}
 \title{Convenience function for converting densities to log-quantile densities}
 \usage{
-MakeLQDsample(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup)),
-  useAlpha = FALSE, alpha = 0.01)
+MakeLQDsample(
+  dmatrix,
+  dSup,
+  lqdSup = seq(0, 1, length.out = length(dSup)),
+  useAlpha = FALSE,
+  alpha = 0.01
+)
 }
 \arguments{
 \item{dmatrix}{Matrix holding the density values on dSup - all rows must be strictly positive and integrate to 1}

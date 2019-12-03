@@ -4,9 +4,14 @@
 \alias{FPCAdens}
 \title{FPCA for densities by log quantile density transformation}
 \usage{
-FPCAdens(dmatrix, dSup, lqdSup = seq(0, 1, length.out = length(dSup)),
-  useAlpha = FALSE, alpha = 0.01, optns = list(dataType = "Dense", error =
-  FALSE))
+FPCAdens(
+  dmatrix,
+  dSup,
+  lqdSup = seq(0, 1, length.out = length(dSup)),
+  useAlpha = FALSE,
+  alpha = 0.01,
+  optns = list(dataType = "Dense", error = FALSE)
+)
 }
 \arguments{
 \item{dmatrix}{Matrix holding the density values on dSup - all rows must be strictly positive and integrate to 1}
