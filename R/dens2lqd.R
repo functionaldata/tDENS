@@ -11,6 +11,9 @@
 #' x <- seq(0,2,length.out =512)
 #' y <- rep(0.5,length.out =512)
 #' y.lqd <- dens2lqd( dens=y, dSup = x) # should equate # log(2)
+#' 
+#' @seealso \code{\link{normaliseDensities}}
+#' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export

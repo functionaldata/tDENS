@@ -13,6 +13,8 @@
 #' y <- rep(0.5,length.out =512)
 #' y.qd <- dens2qd(dens=y, dSup = x) # should equate # 2
 #' 
+#' @seealso \code{\link{normaliseDensities}}
+#' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export

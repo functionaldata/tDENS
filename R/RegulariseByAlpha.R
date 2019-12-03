@@ -15,7 +15,7 @@
 #' 
 #' @return dens density values on x
 #' 
-#' @seealso \code{\link{DeregulariseByAlpha}}
+#' @seealso \code{\link{DeregulariseByAlpha},\link{normaliseDensities}}
 #' 
 #' @examples
 #' 

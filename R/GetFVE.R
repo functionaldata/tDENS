@@ -66,17 +66,18 @@ GetFVE = function(fpcaObj, dmatrix, dSup, metric = 'L2', useAlpha = FALSE, alpha
     }
   }else {
     
-    Qmatrix = t(apply(dmatrix, 1, function(d) dens2quantile(d, dSup)))
+    qSup = fpcaObj$workGrid
+    Qmatrix = t(apply(dmatrix, 1, function(d) dens2quantile(d, dSup, qSup)))
     mu_Q = colMeans(Qmatrix)
     
-    vtot = mean(apply(Qmatrix, 1, function(u) trapzRcpp(X = dSup, Y = (u - mu_Q)^2)))
+    vtot = mean(apply(Qmatrix, 1, function(u) trapzRcpp(X = qSup, Y = (u - mu_Q)^2)))
     K = length(fpcaObj$lambda)
     FVEs = rep(0, K)
     
     for(k in 1:K){
       fittedK.lqd <- fitted(K=k, fpcaObj);
       fittedKQ <- t(apply(fittedK.lqd, 1, function(y) lqd2quantile(lqd = y, lb = dSup[1])))
-      vK <- mean(apply((Qmatrix -  fittedKQ)^2, 1, function(u) trapzRcpp(X = dSup, Y = u)))
+      vK <- mean(apply((Qmatrix -  fittedKQ)^2, 1, function(u) trapzRcpp(X = qSup, Y = u)))
       FVEs[k] <- (vtot - vK)/vtot  
     }
     

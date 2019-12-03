@@ -57,7 +57,7 @@ CreateModeOfVarPlotLQ2D <-function(fpcaObj, domain = 'D', k = 1, dSup = NULL, Qv
   
   
   if(domain == 'Q'){
-    fdapace::CreateModeOfVarPlot(fpcaObj, k = 1, ...)
+    fdapace::CreateModeOfVarPlot(fpcaObj, k = k, ...)
     return(invisible(0))
   } else {
     

@@ -13,6 +13,8 @@
 #' y <- rep(0.5,length.out =512)
 #' y.quantile <- dens2quantile(dens=y, dSup = x) # should equate # 2*seq(0, 1, length.out = 512)
 #' 
+#' @seealso \code{\link{normaliseDensities}}
+#' 
 #' @references
 #' \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016} 
 #' @export
