@@ -1,9 +1,10 @@
 library(testthat)
 
-test_that('normaliseDensities works on a trivial example of truncated normal', {
-  x = seq(-2, 2, length.out = 101)
-  y = matrix(dnorm(x), nrow = 1)
+test_that('normaliseDensities works on a trivial example, U(0,2)', {
+  x = seq(0,2,length.out =512)
+  y = matrix(rep(1,length.out =512), nrow = 1)
+  
   z = normaliseDensities(dmatrix = y, dSup = x)
-
-  expect_equal( 1 , trapzRcpp(X = x, Y = z) )
+  expect_equal(rep(0.5, 512), as.vector(z)) 
+  
 })

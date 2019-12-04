@@ -14,12 +14,12 @@
 #' dSup = seq(-3, 3, length.out = 101)
 #' y <- t(sapply(mu, function(m) dnorm(x = dSup, mean = m)))
 #' 
-#' # Check integral constraint
-#' apply(y, 2, function(yy) trapzRcpp(X = dSup, Y = yy))
+#' # Should return warnings about densities not integrating to 1
+#' lqd = MakeLQDsample(dmatrix = y, dSup = dSup)
 #' 
-#' # Normalise and check again
+#' # Normalise and rerun without warning
 #' dens <- normaliseDensities(dmatrix = y, dSup = dSup)
-#' apply(dens, 2, function(yy) trapzRcpp(X = dSup, Y = yy))
+#' lqd = MakeLQDsample(dmatrix = dens, dSup = dSup)
 #' 
 #' 
 #' @return matrix 'dmatrix' consisting of rows of input of the same name that have been normalised to have integral 1
