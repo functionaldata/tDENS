@@ -23,4 +23,4 @@ library(fdadensity)
 
 ### Who do I talk to if I want somethig fixed/changed/added? ###
 
-You can message Pantelis.
+You can message Alex Petersen.
