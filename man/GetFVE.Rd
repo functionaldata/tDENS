@@ -2,25 +2,54 @@
 % Please edit documentation in R/GetFVE.R
 \name{GetFVE}
 \alias{GetFVE}
-\title{Function for converting densities to quantile functions}
+\title{Compute Metric-based Fraction of Variance Explained}
 \usage{
-GetFVE(fpcaObj, dmatrix, dSup, alpha = 0.01)
+GetFVE(fpcaObj, dmatrix, dSup, metric = "L2", useAlpha = FALSE, alpha = 0.01)
 }
 \arguments{
 \item{fpcaObj}{PACE output (FPCA on LQDs)}
 
-\item{dmatrix}{matrix of densities measures on grid dout, rows correspond to individual densities}
+\item{dmatrix}{matrix of original densities measures on grid dSup, rows correspond to individual densities}
 
-\item{dSup}{support for Density domain - max and min values are assumed to mark the boundary of the support.}
+\item{dSup}{support for Density domain - max and min mark the boundary of the support.}
 
-\item{alpha}{scalar to regularise with (default = 0.01)}
+\item{metric}{metric for measuring variance - 'L2' for Euclidean or 'W' for Wasserstein}
+
+\item{useAlpha}{should regularisation be performed to densities in dmatrix? This should be set to TRUE if densities were regularised prior to FPCA (default = FALSE)}
+
+\item{alpha}{scalar to regularise before computing FVE.  If useAlpha = TRUE, this should match the value used to regularise prior to FPCA (default = 0.01)}
 }
 \value{
 FVEvector
 }
 \description{
-Function for converting densities to quantile functions
+When FPCA is performed on the log quantile density functions, the fraction of variance explained by the first K components is computed based on 
+the density reconstruction and chosen metric.
+}
+\details{
+The fraction of variance explained (FVE) by the first K principal components corresponding to the LQD functions is computed by taking the K-dimensional
+LQD representations, transforming back to densities, and comparing the reconstruction to the original densities using the chosen metric.  If densities were regularised
+prior to transformation and FPCA, the same regularisation parameters should be used here.
+}
+\examples{
+
+data(Top50BabyNames)
+
+# Perform Transformation FPCA for male baby name densities
+dSup = Top50BabyNames$x
+X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE, 
+                   optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 8))
+
+# Compute FVE - must compare to regularized densities 
+
+fveL2 = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, useAlpha = TRUE)
+fveW = GetFVE(fpcaObj = X, dmatrix = t(Top50BabyNames$dens$male), dSup = dSup, 
+                   metric = 'W', useAlpha = TRUE)
+
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{RegulariseByAlpha},\link{lqd2quantile}}
 }

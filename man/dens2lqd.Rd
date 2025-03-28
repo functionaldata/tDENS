@@ -2,30 +2,34 @@
 % Please edit documentation in R/dens2lqd.R
 \name{dens2lqd}
 \alias{dens2lqd}
-\title{Function for converting densities to quantile functions}
+\title{Function for converting densities to log quantile density functions}
 \usage{
-dens2lqd(dens, dSup, N = length(dSup), lqSup = NULL)
+dens2lqd(dens, dSup, N = length(dSup), lqdSup = NULL)
 }
 \arguments{
 \item{dens}{density values on dSup - must be strictly positive and integrate to 1}
 
 \item{dSup}{support (grid) for Density domain}
 
-\item{N}{desired number of points on a [0,1] grid for quantile function; default length(dSup)}
+\item{N}{desired number of points on a [0,1] grid for lqd function; default length(dSup)}
 
-\item{lqSup}{support for LQ domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points}
+\item{lqdSup}{support for lqd domain - must begin at 0 and end at 1; default [0,1] with N-equidistant support points}
 }
 \value{
-lqd log quantile density on lqSup
+lqd log quantile density on lqdSup
 }
 \description{
-Function for converting densities to quantile functions
+Function for converting densities to log quantile density functions
 }
 \examples{
 x <- seq(0,2,length.out =512)
 y <- rep(0.5,length.out =512)
-yOnLQ <- dens2lqd( dens=y, dSup = x) # should equate # -log(1/2)
+y.lqd <- dens2lqd( dens=y, dSup = x) # should equate # log(2)
+
 }
 \references{
-\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2015}
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{normaliseDensities}}
 }

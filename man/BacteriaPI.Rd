@@ -14,5 +14,5 @@ The approximate kernel density estimates of the 813 bacterial
 organisms' isoelectric point (pI) protein distributions.
 }
 \references{
-The authors would like to thank Dr. Chris Knight for providing the original data.
+The authors would like to thank Dr. Chris Knight for providing the original data
 }

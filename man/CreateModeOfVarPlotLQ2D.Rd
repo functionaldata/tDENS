@@ -2,41 +2,75 @@
 % Please edit documentation in R/CreateModeOfVarPlotLQ2D.R
 \name{CreateModeOfVarPlotLQ2D}
 \alias{CreateModeOfVarPlotLQ2D}
-\title{Functional Principal Component Analysis mode of variation plot}
+\title{Transformation Mode of Variation Plot}
 \usage{
-CreateModeOfVarPlotLQ2D(fpcaObj, dSup = NULL, k = 1, domain = "Q",
-  alpha = 0, numOfModes = 7, dSupPlot = NULL, ...)
+CreateModeOfVarPlotLQ2D(
+  fpcaObj,
+  domain = "D",
+  k = 1,
+  dSup = NULL,
+  Qvec = -2:2,
+  alpha = 0,
+  useAlpha = FALSE,
+  ...
+)
 }
 \arguments{
-\item{fpcaObj}{An FPCA class object returned by FPCA().}
+\item{fpcaObj}{An FPCA class object returned by FPCA() on the log quantile density functions.}
 
-\item{dSup}{The support of the original density used by LQD(relevant only for density domain)}
+\item{domain}{should the mode be plotted in LQD ('Q') or density space ('D', the default).}
 
 \item{k}{The k-th mode of variation to plot (default k = 1)}
 
-\item{domain}{character defining if we should plot on the Quantile ('Q') or the Density ('D') domain (default: 'Q')}
+\item{dSup}{The common support of the original densities. Only relevant for \code{domain = 'D'}}
 
-\item{alpha}{regularisation parameter}
+\item{Qvec}{Vector of values \eqn{Q}{Q} to be plotted.  If 0 is not included, it will be added (default is -2:2).  Only relevant for \code{domain = 'D'}}
 
-\item{numOfModes}{scalar number of principal modes to plot (relevant only for density domain, needs to be an odd number >1.) (default: 7)}
+\item{alpha}{(De)regularisation parameter (default is 0).  See details.}
 
-\item{dSupPlot}{The support of the original density used for plotting (relevant only for density domain)}
+\item{useAlpha}{logical - should deregularisation be performed?  Default:FALSE}
 
 \item{...}{Additional arguments for the 'plot' function.}
 }
 \description{
-Create the k-th mode of variation plot around the mean. The red-line is
-the functional mean, the grey shaded areas show the range of variations
-around the mean: \eqn{ \pm Q \sqrt{\lambda_k} \phi_k}{+/- Q sqrt{lambda_k} phi_k}
-for the dark grey area Q = 1, and for the light grey are Q = 2.
+Create the k-th transformation mode of variation plot.
+}
+\details{
+If \code{domain = 'D'} (the default), the a transformation mode of variation is plotted.  The red-line is 
+\eqn{\psi^{-1}(\nu)}{psi^(-1)(nu)}, where \eqn{\nu}{nu} is the mean in LQD space and
+\eqn{\psi}{psi} is the LQD transformation.  Other lines correspond to perturbations by 
+adding multiples of the LQD eigenfunctions \eqn{\rho_k}{rho_k} (with eigenvalues \eqn{\tau_k}{tau_k})
+: \eqn{\psi^{-1}(\nu  + Q \sqrt{\tau_k} \rho_k)}{psi^(-1)(nu + Q sqrt{tau_k} rho_k} 
+for the values \eqn{Q}{Q} in \code{Qvec}.  If \code{alpha} is positive, will attempt to deregularise (see \code{DeregulariseByAlpha}). This
+will throw an error if alpha is too large.
+
+If \code{domain = 'Q'}, ordinary modes of variation are plotted in LQD space (see documentation for \code{CreateModeOfVarPlot} in \code{fdapace}).
 }
 \examples{
-library(fdapace)
-set.seed(1)
-n <- 20
-pts <- seq(0, 1, by=0.05)
-sampWiener <- Wiener(n, pts)
-sampWiener <- Sparsify(sampWiener, pts, 10)
-res <- FPCA(sampWiener$Ly, sampWiener$Lt)
-CreateModeOfVarPlotLQ2D(res)
+## Densities for Top 50 Male Baby Names
+data(Top50BabyNames)
+x = Top50BabyNames$x
+
+# Perform Transformation FPCA for male baby name densities
+X = FPCAdens(dmatrix = t(Top50BabyNames$dens$male), dSup = Top50BabyNames$x, useAlpha = TRUE, 
+                  optns = list(dataType = 'Dense', error = FALSE, methodSelectK = 2))
+
+# Plot Modes
+
+Qvec = quantile(X$xiEst[,1], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[1])
+CreateModeOfVarPlotLQ2D(X, k = 1, dSup = x, Qvec = Qvec, main = 'First Mode, Density Space')
+CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 1, dSup = x, Qvec = Qvec, 
+                            main = 'First Mode, LQD space')
+
+Qvec = quantile(X$xiEst[,2], probs = c(0.1, 0.25, 0.75, 0.9))/sqrt(X$lambda[2])
+CreateModeOfVarPlotLQ2D(X, k = 2, dSup = x, Qvec = Qvec, main = 'Second Mode, Density Space')
+CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 2, dSup = x, Qvec = Qvec, 
+                            main = 'Second Mode, LQD space')
+
+}
+\references{
+\cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
+}
+\seealso{
+\code{\link{DeregulariseByAlpha}}
 }
