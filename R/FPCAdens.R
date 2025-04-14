@@ -7,11 +7,13 @@
 #' @param lqdSup Support grid for lqd domain (default = seq(0, 1, length.out = length(dSup)))
 #' @param useAlpha should regularisation be performed (default=FALSE) 
 #' @param alpha Scalar to regularise the supports with (default=0.01)
-#' @param optns A list of options for FPCA.  See documentation for \code{FPCA}.
+#' @param optns A list of options for FPCA.  See documentation for \code{fdapace::FPCA}.
 #'
 #' @details Densities are transformed to log-quantile densities, followed by standard FPCA.  If \code{useAlpha = TRUE}, densities are regularized before transformation
 #' 
-#' @seealso \code{\link{RegulariseByAlpha},\link{lqd2dens},\link{MakeLQDsample},\link{FPCA}}
+#' @return X - a list containing the output of \code{fdapace::FPCA} in log-quantile density space. See documentation of \code{fdapace::FPCA} for descriptions of the variables in X
+#' 
+#' @seealso \code{\link{RegulariseByAlpha},\link{lqd2dens},\link{MakeLQDsample},\link[fdapace]{FPCA}}
 #' 
 #' @examples
 #' 

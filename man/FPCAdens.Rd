@@ -24,7 +24,10 @@ FPCAdens(
 
 \item{alpha}{Scalar to regularise the supports with (default=0.01)}
 
-\item{optns}{A list of options for FPCA.  See documentation for \code{FPCA}.}
+\item{optns}{A list of options for FPCA.  See documentation for \code{fdapace::FPCA}.}
+}
+\value{
+X - a list containing the output of \code{fdapace::FPCA} in log-quantile density space. See documentation of \code{fdapace::FPCA} for descriptions of the variables in X
 }
 \description{
 Perform FPCA on LQD-transformed densities
@@ -59,5 +62,5 @@ CreateModeOfVarPlotLQ2D(X, domain = 'Q', k = 2, dSup = x, Qvec = Qvec,
 \cite{Functional Data Analysis for Density Functions by Transformation to a Hilbert space, Alexander Petersen and Hans-Georg Mueller, 2016}
 }
 \seealso{
-\code{\link{RegulariseByAlpha},\link{lqd2dens},\link{MakeLQDsample},\link{FPCA}}
+\code{\link{RegulariseByAlpha},\link{lqd2dens},\link{MakeLQDsample},\link[fdapace]{FPCA}}
 }

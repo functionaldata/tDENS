@@ -4,11 +4,13 @@
 \name{BacteriaPI}
 \alias{BacteriaPI}
 \title{pH distribution of 813 bacterial organisms}
-\format{A matrix with 813 rows and 768 columns:
+\format{
+A matrix with 813 rows and 768 columns:
 \describe{
 \item{rowname}{General organism identifier}
 \item{colspace}{pH in [0,14]}
-}}
+}
+}
 \description{
 The approximate kernel density estimates of the 813 bacterial 
 organisms' isoelectric point (pI) protein distributions.
